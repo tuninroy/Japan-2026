@@ -450,15 +450,15 @@
 
 <div class="nav-scroll">
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showRegion('seoul')">Seoul</button>
-    <button class="nav-tab" onclick="showRegion('tokyo1')">Tokyo I</button>
-    <button class="nav-tab" onclick="showRegion('hokkaido')">Hokkaido</button>
-    <button class="nav-tab" onclick="showRegion('miyako')">Miyakojima</button>
-    <button class="nav-tab" onclick="showRegion('kansai')">Kansai</button>
-    <button class="nav-tab" onclick="showRegion('hiroshima')">Hiroshima</button>
-    <button class="nav-tab" onclick="showRegion('tokyo2')">Tokyo II</button>
-    <button class="nav-tab" onclick="showRegion('bookings')">Bookings</button>
-    <button class="nav-tab" onclick="showRegion('tips')">Tips</button>
+    <button class="nav-tab active" onclick="showRegion(event,'seoul')">Seoul</button>
+    <button class="nav-tab" onclick="showRegion(event,'tokyo1')">Tokyo I</button>
+    <button class="nav-tab" onclick="showRegion(event,'hokkaido')">Hokkaido</button>
+    <button class="nav-tab" onclick="showRegion(event,'miyako')">Miyakojima</button>
+    <button class="nav-tab" onclick="showRegion(event,'kansai')">Kansai</button>
+    <button class="nav-tab" onclick="showRegion(event,'hiroshima')">Hiroshima</button>
+    <button class="nav-tab" onclick="showRegion(event,'tokyo2')">Tokyo II</button>
+    <button class="nav-tab" onclick="showRegion(event,'bookings')">Bookings</button>
+    <button class="nav-tab" onclick="showRegion(event,'tips')">Tips</button>
   </div>
 </div>
 
@@ -931,14 +931,23 @@
 
 <script>
 // ── NAV & TOGGLE ────────────────────────────────────────────────────────────
-function showRegion(id) {
+function showRegion(e, id) {
   document.querySelectorAll('.region').forEach(r => r.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+  e.currentTarget.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function toggleDay(card) { card.classList.toggle('open'); }
+// iOS touch fix
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.day-header').forEach(function(header) {
+    header.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      toggleDay(header.closest('.day-card'));
+    });
+  });
+});
 document.querySelectorAll('.region.active .day-card').forEach((c, i) => {
   if (i === 0) c.classList.add('open');
 });
