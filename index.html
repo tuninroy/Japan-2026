@@ -259,6 +259,8 @@
     cursor: pointer;
     gap: 14px;
     user-select: none;
+    -webkit-tap-highlight-color: rgba(184,150,62,0.2);
+    touch-action: manipulation;
   }
   .day-num {
     font-family: 'DM Mono', monospace;
@@ -474,7 +476,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE 1 JUL</div>
       <div class="day-title">Departure — Cape Town · 23h50</div>
@@ -487,7 +489,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">WED–FRI 2–4</div>
       <div class="day-title">Seoul · 2 nights</div>
@@ -503,7 +505,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SUN 5 JUL</div>
       <div class="day-title">Seoul → Tokyo</div>
@@ -525,7 +527,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SUN 5 JUL</div>
       <div class="day-title">Arrive Tokyo</div>
@@ -537,7 +539,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">MON 6 JUL</div>
       <div class="day-title">Tokyo Day 1</div>
@@ -551,7 +553,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE 7 JUL</div>
       <div class="day-title">Tokyo Day 2</div>
@@ -564,7 +566,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">WED 8 JUL</div>
       <div class="day-title">Tokyo → Hokkaido</div>
@@ -593,7 +595,7 @@
     <div class="highlight-text">Sea urchin fishing ban lifts in June — July is the absolute sweet spot for fresh Shakotan uni. The coastline ("Shakotan Blue") is some of the most spectacular water in Japan.</div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">WED 8 JUL</div>
       <div class="day-title">Arrive Shakotan Peninsula</div>
@@ -606,7 +608,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">THU–FRI 9–10</div>
       <div class="day-title">Shakotan · IIDA Inn</div>
@@ -621,7 +623,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SAT 11 JUL</div>
       <div class="day-title">Hokkaido → Miyakojima</div>
@@ -650,7 +652,7 @@
     <div class="highlight-text">Flat island, easy driving, coral-clear water. Base in Hirara — central, walkable, local restaurants and harbour sunsets. Far more authentic than the resort strip on the west coast.</div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SAT–MON 11–13</div>
       <div class="day-title">Miyakojima · 3 nights</div>
@@ -665,7 +667,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE 14 JUL</div>
       <div class="day-title">Miyakojima → Osaka</div>
@@ -689,7 +691,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">WED 15 JUL</div>
       <div class="day-title">Koyasan · Temple Stay</div>
@@ -704,7 +706,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">THU 16 JUL</div>
       <div class="day-title">Koyasan → Osaka</div>
@@ -718,7 +720,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">FRI 17 JUL</div>
       <div class="day-title">Osaka · Gion Matsuri Eve</div>
@@ -730,7 +732,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SAT 18 JUL</div>
       <div class="day-title">Kyoto · Gion Matsuri Day</div>
@@ -745,7 +747,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">SUN 19 JUL</div>
       <div class="day-title">Kyoto Day 2 · Special Dinner</div>
@@ -771,7 +773,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">MON 20 JUL</div>
       <div class="day-title">Hiroshima · Special Dinner</div>
@@ -785,7 +787,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE 21 JUL</div>
       <div class="day-title">Miyajima Island</div>
@@ -812,7 +814,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE–WED 21–22</div>
       <div class="day-title">Asakusa · OMO3 Hoshino</div>
@@ -827,7 +829,7 @@
     </div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">THU 23 JUL</div>
       <div class="day-title">Departure · Narita</div>
@@ -939,14 +941,23 @@ function showRegion(e, id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function toggleDay(card) { card.classList.toggle('open'); }
-// iOS touch fix
+
+// Attach toggle to all day cards - works on iOS and Android
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.day-header').forEach(function(header) {
+  document.querySelectorAll('.day-card').forEach(function(card) {
+    var header = card.querySelector('.day-header');
+    if (!header) return;
+    header.addEventListener('click', function(e) {
+      card.classList.toggle('open');
+    });
     header.addEventListener('touchend', function(e) {
       e.preventDefault();
-      toggleDay(header.closest('.day-card'));
+      card.classList.toggle('open');
     });
   });
+  // Open first card in active region
+  var firstCard = document.querySelector('.region.active .day-card');
+  if (firstCard) firstCard.classList.add('open');
 });
 document.querySelectorAll('.region.active .day-card').forEach((c, i) => {
   if (i === 0) c.classList.add('open');
