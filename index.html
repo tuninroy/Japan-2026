@@ -932,163 +932,122 @@
 <footer>旅を楽しんでください · Enjoy the journey · July 2026</footer>
 
 <script>
-// ── NAV & TOGGLE ────────────────────────────────────────────────────────────
+// CORE NAV & TOGGLE — isolated, no dependencies
 function showRegion(e, id) {
-  document.querySelectorAll('.region').forEach(r => r.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  e.currentTarget.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    document.querySelectorAll('.region').forEach(function(r) { r.classList.remove('active'); });
+    document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    e.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch(err) { console.log('showRegion error:', err); }
 }
-function toggleDay(card) { card.classList.toggle('open'); }
 
-// Attach toggle to all day cards - works on iOS and Android
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
+  // Attach toggles to day cards
   document.querySelectorAll('.day-card').forEach(function(card) {
     var header = card.querySelector('.day-header');
     if (!header) return;
-    header.addEventListener('click', function(e) {
-      card.classList.toggle('open');
-    });
-    header.addEventListener('touchend', function(e) {
-      e.preventDefault();
+    header.addEventListener('click', function() {
       card.classList.toggle('open');
     });
   });
-  // Open first card in active region
-  var firstCard = document.querySelector('.region.active .day-card');
-  if (firstCard) firstCard.classList.add('open');
+  // Open first card
+  var first = document.querySelector('.region.active .day-card');
+  if (first) first.classList.add('open');
 });
-document.querySelectorAll('.region.active .day-card').forEach((c, i) => {
-  if (i === 0) c.classList.add('open');
-});
+</script>
 
-// ── TRIP EVENTS (mirrors service worker list) ────────────────────────────────
-const TRIP_EVENTS = [
+<script>
+// NOTIFICATIONS & ALERTS — wrapped in try-catch so errors don't break toggles
+try {
+
+var TRIP_EVENTS = [
   { id: 'reminder-nakashima',  type: 'reminder', icon: '⏰', title: 'Book Nakashima Restaurant', body: 'Reservations now open for 20 July dinner · 3 Michelin stars · ¥20,790pp · Book direct.', date: '2026-05-20' },
   { id: 'reminder-shinkansen', type: 'reminder', icon: '⏰', title: 'Book Shinkansen Hiroshima→Tokyo', body: 'Tickets release at 10:00am JST today · Book at shinkansen-ticket.com · ~¥20,000pp.', date: '2026-06-21' },
-  { id: 'reminder-teamlab',    type: 'reminder', icon: '⏰', title: 'Book teamLab Planets', body: 'Peak July season · Book now at teamlab.art · Morning slot · Planets over Borderless.', date: '2026-05-01' },
-  { id: 'reminder-obus',       type: 'reminder', icon: '⏰', title: 'Book Overnight Bus Kyoto→Hiroshima', body: 'Book at willer-travel.com/en/ or kosokubus.com/en/ · 19 July night.', date: '2026-04-15' },
-  { id: 'flight-et844',   type: 'flight',   icon: '✈️', title: 'ET844 departs tonight 23:50', body: 'Cape Town → Addis Ababa · Pack and head to airport.', date: '2026-07-01' },
-  { id: 'flight-et672a',  type: 'flight',   icon: '✈️', title: 'ET672 departs tonight 22:35', body: 'Addis Ababa → Seoul · Arriving 16:00 tomorrow.', date: '2026-07-01' },
-  { id: 'flight-et672b',  type: 'flight',   icon: '✈️', title: 'ET672 Seoul→Tokyo today 17:15', body: 'Seoul Incheon → Tokyo Narita · Arrives 19:40.', date: '2026-07-04' },
-  { id: 'flight-sky719',  type: 'flight',   icon: '✈️', title: 'SKY719 Haneda→New Chitose 14:35', body: 'Collect hire car on arrival. Drive to Lake Toyako then Shakotan.', date: '2026-07-08' },
-  { id: 'flight-sky706',  type: 'flight',   icon: '✈️', title: 'SKY706 New Chitose→Haneda 08:15', body: '70 min connection — go straight to Yamato counter to forward bags to OMO3.', date: '2026-07-11' },
-  { id: 'flight-sky613',  type: 'flight',   icon: '✈️', title: 'SKY613 Haneda→Shimojishima 11:05', body: 'Arrives Miyakojima 14:05. IDP required for car hire.', date: '2026-07-11' },
-  { id: 'flight-jta128',  type: 'flight',   icon: '✈️', title: 'JTA128 Miyakojima→Osaka KIX 19:35', body: 'Arrives 21:55 · Take Haruka to Wakayama.', date: '2026-07-14' },
-  { id: 'flight-et673',   type: 'flight',   icon: '✈️', title: 'ET673 Narita→Addis 20:40', body: '⚠️ Leave OMO3 Asakusa by 17:00! Subway to Ueno then N'EX ~60 min.', date: '2026-07-23' },
+  { id: 'reminder-teamlab',    type: 'reminder', icon: '⏰', title: 'Book teamLab Borderless', body: 'Tickets on sale 1 May · teamlab.art · Azabudai Hills · Morning slot recommended.', date: '2026-05-01' },
+  { id: 'reminder-yoroniku',   type: 'reminder', icon: '⏰', title: 'Book Ebisu Yoroniku', body: 'Reservations open on Tabelog at 11am JST on 1 June · Book for Tokyo I dinner (5-7 July).', date: '2026-06-01' },
+  { id: 'reminder-obus',       type: 'reminder', icon: '⏰', title: 'Book Overnight Bus Kyoto→Hiroshima', body: 'Book at willer-travel.com/en/ · 19 July night.', date: '2026-04-15' },
   { id: 'checkin-ninetree',    type: 'checkin', icon: '🏨', title: 'Check-in: Nine Tree Seoul today', body: 'Nine Tree by Parnas Myeongdong 2 · Check-in from 15:00 · Huayun Trip transfer booked.', date: '2026-07-02' },
   { id: 'checkin-niwa',        type: 'checkin', icon: '🏨', title: 'Check-in: Hotel Niwa Tokyo today', body: 'Hotel Niwa Tokyo · Chiyoda City · Check-in from 15:00.', date: '2026-07-04' },
   { id: 'checkin-miharashiso', type: 'checkin', icon: '🏠', title: 'Check-in: Miharashiso today', body: 'Seafood & Food Miharashiso · Shakotan · Check-in from 15:00. Lake Toyako fireworks at 20:30!', date: '2026-07-08' },
-  { id: 'checkin-jrinn',       type: 'checkin', icon: '🏨', title: 'Check-in: JR Inn Chitose today', body: 'JR Inn Chitose · 10 min train to airport tomorrow · Check-in from 15:00.', date: '2026-07-10' },
-  { id: 'checkin-miyako',      type: 'checkin', icon: '🏠', title: 'Check-in: Miyakojima today', body: 'Hotel Yah · Shimojishima · Collect car hire on arrival via Klook. IDP required.', date: '2026-07-11' },
-  { id: 'checkin-wakayama',    type: 'checkin', icon: '🏨', title: 'Check-in: S3 Wakayama tonight', body: 'S3 Capsule Hotel · Separate male/female sections · Late arrival only.', date: '2026-07-14' },
-  { id: 'checkin-koyasan',     type: 'checkin', icon: '🏯', title: '⚠️ Koyasan check-in 15:00–17:00 ONLY', body: 'Fudo-in Temple · Must arrive between 15:00–17:00. Dinner 17:30. DO NOT BE LATE.', date: '2026-07-15' },
-  { id: 'checkin-kyoto',       type: 'checkin', icon: '🏨', title: 'Check-in: Miru Kyoto Gion today', body: 'Miru Kyoto Gion · Check-in from 15:00. Yoiyama festival tonight from 18:00!', date: '2026-07-17' },
+  { id: 'checkin-jrinn',       type: 'checkin', icon: '🏨', title: 'Check-in: JR Inn Chitose today', body: 'JR Inn Chitose · 10 min train to airport tomorrow.', date: '2026-07-10' },
+  { id: 'checkin-miyako',      type: 'checkin', icon: '🏠', title: 'Check-in: Miyakojima today', body: 'Hotel Yah · Collect car hire via Klook. IDP required.', date: '2026-07-11' },
+  { id: 'checkin-wakayama',    type: 'checkin', icon: '🏨', title: 'Check-in: S3 Wakayama tonight', body: 'S3 Capsule Hotel · Separate male/female sections.', date: '2026-07-14' },
+  { id: 'checkin-koyasan',     type: 'checkin', icon: '🏯', title: '⚠️ Koyasan check-in 15:00–17:00 ONLY', body: 'Fudo-in Temple · MUST arrive 15:00–17:00. Dinner 17:30. DO NOT BE LATE.', date: '2026-07-15' },
+  { id: 'checkin-kyoto',       type: 'checkin', icon: '🏨', title: 'Check-in: Miru Kyoto Gion today', body: 'Miru Kyoto Gion · Yoiyama festival tonight from 18:00!', date: '2026-07-17' },
   { id: 'checkin-hiroshima',   type: 'checkin', icon: '🏨', title: 'Check-in: The Knot Hiroshima today', body: 'The Knot Hiroshima · Rooftop bar overlooks Peace Memorial Park.', date: '2026-07-20' },
   { id: 'checkin-omo3',        type: 'checkin', icon: '🏨', title: 'Check-in: OMO3 Asakusa today', body: 'OMO3 Asakusa by Hoshino Resorts · Your forwarded bags should be waiting!', date: '2026-07-21' },
-  { id: 'event-koyasan-ceremony', type: 'event', icon: '🔔', title: 'Morning ceremony TODAY 07:00', body: 'Fudo-in Temple · DO NOT MISS · Set your alarm! Incense, chanting, candlelight.', date: '2026-07-16' },
-  { id: 'event-gionmatsuri',      type: 'event', icon: '🎏', title: 'Gion Matsuri procession TODAY', body: 'Main procession from 09:00 · Shijo-Karasuma · 23 floats · Arrive early to get a spot!', date: '2026-07-18' },
-  { id: 'event-kikunoi',          type: 'event', icon: '🍽️', title: 'Kikunoi Honten tonight 19:00', body: '3★ Michelin · Smart casual dress · Take taxi from Gion ~15 min. Walk Ninenzaka after.', date: '2026-07-17' },
-  { id: 'event-nakashima',        type: 'event', icon: '🍽️', title: 'Nakashima Restaurant tonight', body: '3★ Michelin · Hiroshima · ¥20,790pp. Allow 2.5 hours.', date: '2026-07-20' },
-  { id: 'event-laketoyako',       type: 'event', icon: '🎆', title: 'Lake Toyako fireworks tonight 20:30', body: 'Nightly fireworks at Lake Toya · 20 min show · Get to the lakeside!', date: '2026-07-08' },
-  { id: 'event-overnightbus',     type: 'event', icon: '🚌', title: 'Overnight bus tonight', body: 'Kyoto → Hiroshima · Departs late evening. Head to bus terminal after dinner.', date: '2026-07-19' },
-  { id: 'event-miyajima',         type: 'event', icon: '⛩️', title: 'Miyajima day trip today', body: 'Ferry from Hiroshima pier ~10 min · Check tide times for floating torii · Grilled oysters!', date: '2026-07-20' },
-  { id: 'depart-narita',          type: 'flight', icon: '✈️', title: '⚠️ Leave OMO3 by 17:00 TODAY', body: 'ET673 departs Narita 20:40 · Subway to Ueno then N'EX ~60 min · Allow 3 hours at airport.', date: '2026-07-23' },
+  { id: 'event-koyasan',   type: 'event', icon: '🔔', title: 'Morning ceremony TODAY 07:00', body: 'Fudo-in Temple · DO NOT MISS.', date: '2026-07-16' },
+  { id: 'event-gion',      type: 'event', icon: '🎏', title: 'Gion Matsuri procession TODAY', body: 'Main procession from 09:00 · Shijo-Karasuma · Arrive early!', date: '2026-07-18' },
+  { id: 'event-kikunoi',   type: 'event', icon: '🍽️', title: 'Kikunoi Honten tonight 19:00', body: '3★ Michelin · Smart casual · Take taxi from Gion.', date: '2026-07-17' },
+  { id: 'event-nakashima', type: 'event', icon: '🍽️', title: 'Nakashima Restaurant tonight', body: '3★ Michelin · Hiroshima · ¥20,790pp.', date: '2026-07-20' },
+  { id: 'event-toyako',    type: 'event', icon: '🎆', title: 'Lake Toyako fireworks tonight 20:30', body: 'Nightly fireworks · 20 min show · Get to the lakeside!', date: '2026-07-08' },
+  { id: 'event-bus',       type: 'event', icon: '🚌', title: 'Overnight bus tonight', body: 'Kyoto → Hiroshima · Head to bus terminal after dinner.', date: '2026-07-19' },
+  { id: 'depart-narita',   type: 'flight', icon: '✈️', title: '⚠️ Leave OMO3 by 17:00 TODAY', body: 'ET673 departs Narita 20:40 · Allow 3 hours at airport.', date: '2026-07-23' },
 ];
 
-// ── IN-APP ALERTS (Option 2 — Maya) ─────────────────────────────────────────
 function getTodayAlerts() {
-  const now = new Date();
-  const todayStr = now.toISOString().slice(0,10);
-  const tomorrowStr = new Date(now.getTime() + 86400000).toISOString().slice(0,10);
-  // Show today's events + anything overdue (reminders not yet past)
-  return TRIP_EVENTS.filter(ev => {
-    if (ev.type === 'reminder') {
-      return ev.date >= todayStr && ev.date <= tomorrowStr;
-    }
+  var now = new Date();
+  var todayStr = now.toISOString().slice(0,10);
+  var tomorrowStr = new Date(now.getTime() + 86400000).toISOString().slice(0,10);
+  return TRIP_EVENTS.filter(function(ev) {
+    if (ev.type === 'reminder') return ev.date >= todayStr && ev.date <= tomorrowStr;
     return ev.date === todayStr || ev.date === tomorrowStr;
   });
 }
 
 function dismissAlert(id) {
-  const dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
-  dismissed.push(id);
-  localStorage.setItem('dismissed', JSON.stringify(dismissed));
+  try {
+    var dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
+    dismissed.push(id);
+    localStorage.setItem('dismissed', JSON.stringify(dismissed));
+  } catch(e) {}
   renderAlerts();
 }
 
 function renderAlerts() {
-  const dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
-  const alerts = getTodayAlerts().filter(ev => !dismissed.includes(ev.id));
-  const banner = document.getElementById('alert-banner');
-  if (alerts.length === 0) { banner.style.display = 'none'; return; }
-  banner.style.display = 'block';
-  banner.innerHTML = alerts.map(ev => `
-    <div class="alert-item">
-      <span class="alert-icon">${ev.icon}</span>
-      <div class="alert-body">
-        <div class="alert-title">${ev.title}</div>
-        <div class="alert-text">${ev.body}</div>
-      </div>
-      <span class="alert-dismiss" onclick="dismissAlert('${ev.id}')">✕</span>
-    </div>
-  `).join('');
-}
-
-// ── SERVICE WORKER & PUSH NOTIFICATIONS (Option 1 — Tunin) ──────────────────
-async function registerServiceWorker() {
-  if (!('serviceWorker' in navigator)) return;
   try {
-    const reg = await navigator.serviceWorker.register('sw.js');
-    await navigator.serviceWorker.ready;
-    reg.active && reg.active.postMessage({ type: 'SCHEDULE_NOTIFICATIONS' });
-  } catch(e) {
-    console.log('SW registration failed:', e);
-  }
+    var dismissed = [];
+    try { dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]'); } catch(e) {}
+    var alerts = getTodayAlerts().filter(function(ev) { return dismissed.indexOf(ev.id) === -1; });
+    var banner = document.getElementById('alert-banner');
+    if (!banner) return;
+    if (alerts.length === 0) { banner.style.display = 'none'; return; }
+    banner.style.display = 'block';
+    banner.innerHTML = alerts.map(function(ev) {
+      return '<div class="alert-item"><span class="alert-icon">' + ev.icon + '</span><div class="alert-body"><div class="alert-title">' + ev.title + '</div><div class="alert-text">' + ev.body + '</div></div><span class="alert-dismiss" onclick="dismissAlert('' + ev.id + '')">✕</span></div>';
+    }).join('');
+  } catch(err) { console.log('renderAlerts error:', err); }
 }
 
 async function requestNotifications() {
-  if (!('Notification' in window)) {
-    showNotifStatus('Push notifications not supported on this browser.');
-    return;
-  }
-  const permission = await Notification.requestPermission();
-  const btn = document.getElementById('notif-btn');
-  const status = document.getElementById('notif-status');
-  if (permission === 'granted') {
-    btn.style.display = 'none';
-    status.style.display = 'block';
-    status.textContent = '🔔 Notifications enabled — you'll be alerted before each check-in and key event.';
-    localStorage.setItem('notif-granted', '1');
-    await registerServiceWorker();
-  } else {
-    showNotifStatus('Notifications blocked. Enable in your phone settings → Safari/Chrome → Notifications.');
-  }
+  try {
+    if (!('Notification' in window)) { return; }
+    var permission = await Notification.requestPermission();
+    var btn = document.getElementById('notif-btn');
+    var status = document.getElementById('notif-status');
+    if (permission === 'granted') {
+      if (btn) btn.style.display = 'none';
+      if (status) { status.style.display = 'block'; status.textContent = '🔔 Notifications enabled.'; }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(function(e) { console.log('SW error:', e); });
+      }
+    }
+  } catch(err) { console.log('notification error:', err); }
 }
 
-function showNotifStatus(msg) {
-  const status = document.getElementById('notif-status');
-  status.style.display = 'block';
-  status.textContent = msg;
-}
+window.addEventListener('load', function() {
+  try {
+    var btn = document.getElementById('notif-btn');
+    if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      if (btn) btn.style.display = 'block';
+    }
+    renderAlerts();
+  } catch(err) { console.log('init error:', err); }
+});
 
-function initApp() {
-  // Show notification button if not yet granted
-  const btn = document.getElementById('notif-btn');
-  const status = document.getElementById('notif-status');
-  if ('Notification' in window && Notification.permission === 'granted') {
-    status.style.display = 'block';
-    status.textContent = '🔔 Notifications active.';
-    registerServiceWorker();
-  } else if ('Notification' in window && Notification.permission !== 'denied') {
-    btn.style.display = 'block';
-  }
-  // Render in-app alerts
-  renderAlerts();
-}
-
-window.addEventListener('load', initApp);
+} catch(globalErr) { console.log('Script error:', globalErr); }
 </script>
 </body>
 </html>
