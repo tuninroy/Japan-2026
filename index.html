@@ -452,6 +452,7 @@
 
 <div class="nav-scroll">
   <div class="nav-tabs">
+    <button class="nav-tab" onclick="showRegion(event,'summary')">Overview</button>
     <button class="nav-tab active" onclick="showRegion(event,'seoul')">Seoul</button>
     <button class="nav-tab" onclick="showRegion(event,'tokyo1')">Tokyo I</button>
     <button class="nav-tab" onclick="showRegion(event,'hokkaido')">Hokkaido</button>
@@ -467,6 +468,177 @@
 <main>
 
 <!-- SEOUL -->
+<section class="region" id="summary">
+  <div class="region-header">
+    <div class="region-kanji">概要</div>
+    <div class="region-info">
+      <h2>Trip Overview</h2>
+      <div class="region-dates">1 – 24 July 2026 · Tunin &amp; Maya</div>
+    </div>
+  </div>
+
+  <style>
+  .summary-grid { padding: 16px; }
+  .summary-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 4px;
+    align-items: start;
+  }
+  .summary-row:first-child { border-top: 1px solid var(--border); }
+  .s-date { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--stone); }
+  .s-loc { font-size: 17px; font-weight: 400; }
+  .s-detail { font-size: 14px; color: var(--mist); padding-left: 8px; }
+  .s-tag { display:inline-block; font-family:'DM Mono',monospace; font-size:11px; padding:1px 6px; border-radius:2px; margin-right:4px; }
+  .s-flight { background:rgba(192,57,43,0.15); color:#e74c3c; }
+  .s-hotel { background:rgba(184,150,62,0.15); color:var(--gold); }
+  .s-event { background:rgba(100,180,100,0.15); color:#7dbb7d; }
+  .summary-map { padding: 16px; }
+  .map-route { display:flex; flex-direction:column; gap:0; }
+  .map-stop { display:flex; align-items:flex-start; gap:12px; padding:8px 0; }
+  .map-dot { width:12px; height:12px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:6px; }
+  .map-line { width:2px; background:var(--border); flex-shrink:0; min-height:30px; margin-left:5px; }
+  .map-info { flex:1; }
+  .map-city { font-size:18px; }
+  .map-dates { font-family:'DM Mono',monospace; font-size:13px; color:var(--stone); }
+  .map-transport { font-size:13px; color:var(--mist); margin-top:2px; }
+  </style>
+
+  <div class="summary-grid">
+    <div class="summary-row">
+      <div class="s-date">1 Jul</div>
+      <div class="s-loc">Cape Town → Addis</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET844</span> Departs 23:50</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">2 Jul</div>
+      <div class="s-loc">→ Seoul</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET672</span> Arrives 16:00 · <span class="s-tag s-hotel">🏨 Nine Tree</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">3 Jul</div>
+      <div class="s-loc">Seoul</div>
+      <div class="s-detail">Gyeongbokgung · Bukchon · Gwangjang Market</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">4 Jul</div>
+      <div class="s-loc">Seoul → Tokyo</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET672</span> 17:15 → 19:40 · <span class="s-tag s-hotel">🏨 Hotel Niwa</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">5–7 Jul</div>
+      <div class="s-loc">Tokyo I</div>
+      <div class="s-detail">Yanaka · Tsukiji · teamLab Borderless · Shinjuku · Harajuku</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">8 Jul</div>
+      <div class="s-loc">Tokyo → Hokkaido</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ SKY719</span> 14:35 · Lake Toyako fireworks · <span class="s-tag s-hotel">🏠 Miharashiso</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">9 Jul</div>
+      <div class="s-loc">Shakotan</div>
+      <div class="s-detail">Cape Kamui · Shakotan Blue · Peak uni season · <span class="s-tag s-hotel">🏠 Miharashiso</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">10 Jul</div>
+      <div class="s-loc">Hokkaido → Chitose</div>
+      <div class="s-detail"><span class="s-tag s-hotel">🏨 JR Inn Chitose</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">11 Jul</div>
+      <div class="s-loc">→ Miyakojima</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ SKY706 + SKY613</span> Via Haneda · Forward bags to OMO3 · <span class="s-tag s-hotel">🏠 Hotel Yah</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">12–13 Jul</div>
+      <div class="s-loc">Miyakojima</div>
+      <div class="s-detail">Sunayama Beach · Irabu Bridge · Awamori evenings · <span class="s-tag s-hotel">🏠 Hotel Yah</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">14 Jul</div>
+      <div class="s-loc">→ Osaka/Wakayama</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ JTA128</span> 19:35 → 21:55 · <span class="s-tag s-hotel">🏨 S3 Capsule</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">15 Jul</div>
+      <div class="s-loc">Koyasan</div>
+      <div class="s-detail">Check-in 15:00–17:00 STRICTLY · <span class="s-tag s-hotel">🏯 Fudo-in Temple</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">16 Jul</div>
+      <div class="s-loc">Koyasan → Osaka</div>
+      <div class="s-detail"><span class="s-tag s-event">🔔 07:00 Ceremony</span> · Dotonbori · Shinsekai</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">17 Jul</div>
+      <div class="s-loc">Kyoto</div>
+      <div class="s-detail"><span class="s-tag s-event">🎏 Yoiyama</span> · <span class="s-tag s-event">🍽️ Kikunoi 19:00</span> · <span class="s-tag s-hotel">🏨 Miru Gion</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">18 Jul</div>
+      <div class="s-loc">Kyoto</div>
+      <div class="s-detail"><span class="s-tag s-event">🎪 Gion Matsuri 09:00</span> · Fushimi Inari · Arashiyama</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">19 Jul</div>
+      <div class="s-loc">Kyoto → Hiroshima</div>
+      <div class="s-detail"><span class="s-tag s-flight">🚅 Shinkansen</span> 15:00–15:30 · Left side A/B seats · <span class="s-tag s-hotel">🏨 The Knot</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">20 Jul</div>
+      <div class="s-loc">Hiroshima</div>
+      <div class="s-detail">Miyajima · Peace Memorial · <span class="s-tag s-event">🍽️ Nakashima dinner</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">20–21 Jul</div>
+      <div class="s-loc">→ Tokyo</div>
+      <div class="s-detail"><span class="s-tag s-flight">🚌 Overnight Bus</span> ~12 hrs · Premium seat</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">21–22 Jul</div>
+      <div class="s-loc">Tokyo II</div>
+      <div class="s-detail">Asakusa · Senso-ji · Yanaka · <span class="s-tag s-hotel">🏨 OMO3 Asakusa</span></div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">23 Jul</div>
+      <div class="s-loc">→ Addis</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET673</span> 20:40 · Leave OMO3 by 17:00</div>
+    </div>
+    <div class="summary-row">
+      <div class="s-date">24 Jul</div>
+      <div class="s-loc">→ Cape Town</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET847</span> Addis 08:40 · Arrives CPT 14:35</div>
+    </div>
+  </div>
+
+  <div class="summary-map">
+    <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--stone);margin-bottom:16px;letter-spacing:0.08em;">ROUTE MAP</div>
+    <div class="map-route">
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🇿🇦 Cape Town</div><div class="map-dates">1 Jul</div><div class="map-transport">✈️ ET844 → Addis · ET672 → Seoul</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🇰🇷 Seoul</div><div class="map-dates">2–4 Jul · 2 nights</div><div class="map-transport">✈️ ET672 → Tokyo Narita</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🗼 Tokyo I</div><div class="map-dates">4–8 Jul · 4 nights</div><div class="map-transport">✈️ SKY719 → New Chitose</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🦑 Hokkaido</div><div class="map-dates">8–11 Jul · 3 nights</div><div class="map-transport">✈️ SKY706 → Haneda · SKY613 → Shimojishima</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🏖️ Miyakojima</div><div class="map-dates">11–14 Jul · 3 nights</div><div class="map-transport">✈️ JTA128 → Osaka KIX</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">⛩️ Kansai</div><div class="map-dates">14–19 Jul · 5 nights</div><div class="map-transport">🚅 Shinkansen → Hiroshima · 19 Jul 15:00</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🕊️ Hiroshima</div><div class="map-dates">19–21 Jul · 1 night</div><div class="map-transport">🚌 Overnight Bus → Tokyo · ~12 hrs</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🗼 Tokyo II</div><div class="map-dates">21–23 Jul · 2 nights</div><div class="map-transport">✈️ ET673 → Addis · ET847 → Cape Town</div></div></div>
+      <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
+      <div class="map-stop"><div class="map-dot" style="background:var(--red)"></div><div class="map-info"><div class="map-city">🇿🇦 Cape Town</div><div class="map-dates">24 Jul · 14:35</div></div></div>
+    </div>
+  </div>
+
+</section>
+
 <section class="region active" id="seoul">
   <div class="region-header">
     <div class="region-kanji">서울</div>
@@ -602,21 +774,20 @@
       <div class="day-chevron">▾</div>
     </div>
     <div class="day-body">
-      <div class="item"><div class="item-icon">🏠</div><div class="item-content"><div class="item-label">Stay Night 1</div><div class="item-text">Seafood &amp; Food Miharashiso · Shakotan Peninsula</div><div class="item-sub"><span class="tag tag-booked">Booked</span> · Primary booking · Seaside inn, near Shimamu Beach · Rinkoso email pending — if unavailable, Miharashiso confirmed · <a href="https://www.kanko-shakotan.jp/en/inn/seafood-inn-restaurant-miharashi-so/" target="_blank" class="hotel-link">🔗 Shakotan Tourism</a></div></div></div>
+      <div class="item"><div class="item-icon">🏠</div><div class="item-content"><div class="item-label">Stay 8–10 Jul · 2 nights</div><div class="item-text">Seafood &amp; Food Miharashiso · Shakotan Peninsula</div><div class="item-sub"><span class="tag tag-booked">Booked via Agoda</span> · Seaside inn, near Shimamu Beach · <a href="https://www.kanko-shakotan.jp/en/inn/seafood-inn-restaurant-miharashi-so/" target="_blank" class="hotel-link">🔗 Shakotan Tourism</a></div></div></div>
       <div class="item"><div class="item-icon">🌊</div><div class="item-content"><div class="item-label">Drive</div><div class="item-text">New Chitose → Lake Toyako → Shakotan</div><div class="item-sub">Route 229 coastal road — detour via Lake Toyako adds ~45 min but is worth every minute</div></div></div>
       <div class="item"><div class="item-icon">🎆</div><div class="item-content"><div class="item-label">Evening · Lake Toyako</div><div class="item-text">Nightly Fireworks · Lake Toya, Hokkaido</div><div class="item-sub">20-minute hanabi display every night late April–October · Show starts ~20:30 · Spectacular lakeside setting with Mt Yotei backdrop · A perfect first Hokkaido evening for you and Maya</div></div></div>
+      <div class="item"><div class="item-icon">🦔</div><div class="item-content"><div class="item-label">Local Tip · Sea Urchin</div><div class="item-text">July is peak uni season — fishing ban lifts in June</div><div class="item-sub">Ask your inn about uni don lunch at Rinkousou nearby. The drive along Route 229 is spectacular — pull over at viewpoints along the coast</div></div></div>
     </div>
   </div>
 
   <div class="day-card">
     <div class="day-header">
       <div class="day-num">THU–FRI 9–10</div>
-      <div class="day-title">Shakotan · IIDA Inn</div>
+      <div class="day-title">Shakotan · Day 2</div>
       <div class="day-chevron">▾</div>
     </div>
     <div class="day-body">
-      <div class="item"><div class="item-icon">🏠</div><div class="item-content"><div class="item-label">Stay Nights 2–3</div><div class="item-text">Nagomi no Yado IIDA · Yobetsu, Shakotan</div><div class="item-sub"><span class="tag tag-todo">Waitlisted</span> · On waitlist — awaiting confirmation · 100-year-old family inn · <a href="https://yado-iida.com/en/" target="_blank" class="hotel-link">🔗 yado-iida.com</a></div></div></div>
-      <div class="item"><div class="item-icon">🦔</div><div class="item-content"><div class="item-label">Dinner</div><div class="item-text">Summer Seafood Plan — IIDA's specialty</div><div class="item-sub">Options: hairy crab plan, double sea urchin plan, or abalone plan — choose at booking</div></div></div>
       <div class="item"><div class="item-icon">🗺️</div><div class="item-content"><div class="item-label">Explore</div><div class="item-text">Cape Kamui &amp; Shakotan Blue coastline</div><div class="item-sub">Walk to the cape tip — 180° views of the Japan Sea, sea caves visible from the cliffs</div></div></div>
       <div class="item"><div class="item-icon">🎆</div><div class="item-content"><div class="item-label">Check Date · Sapporo</div><div class="item-text">Makomanai Fireworks Festival · Sapporo</div><div class="item-sub">22,000 fireworks — one of Hokkaido's biggest festivals, typically mid-July · Exact 2026 date TBC · Check city-hokkaido.net closer to trip <span class="tag tag-todo">⏰ Confirm Date</span></div></div></div>
       <div class="item"><div class="item-icon">🍱</div><div class="item-content"><div class="item-label">Lunch Option</div><div class="item-text">Rinkousou · Fresh uni don</div><div class="item-sub">The fisherman's inn also serves lunch in summer — fresh sea urchin rice bowl, some of the best in Japan</div></div></div>
@@ -630,7 +801,7 @@
       <div class="day-chevron">▾</div>
     </div>
     <div class="day-body">
-      <div class="item"><div class="item-icon">🏨</div><div class="item-content"><div class="item-label">Night 10 Jul</div><div class="item-text">JR Inn Chitose</div><div class="item-sub"><span class="tag tag-booked">Booked</span> · 30 sec walk to Chitose Station · 10 min train to airport · Public bath, pillow library, complimentary breakfast · <a href="https://www.jr-inn.jp/chitose/en/" target="_blank" class="hotel-link">🔗 jr-inn.jp</a></div></div></div>
+      <div class="item"><div class="item-icon">🏨</div><div class="item-content"><div class="item-label">Night 10–11 Jul</div><div class="item-text">New Chitose Inn</div><div class="item-sub"><span class="tag tag-booked">Booked</span> · Near New Chitose Airport · Early flight 08h15 on 11 Jul</div></div></div>
       <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight 1</div><div class="item-text">SKY706 · New Chitose → Haneda</div><div class="item-sub">Departs 08h15 · Arrives 09h55</div></div></div>
       <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight 2</div><div class="item-text">SKY613 · Haneda → Shimojishima</div><div class="item-sub">Departs 11h05 · Arrives 14h05 · Skymark</div></div></div>
     </div>
@@ -703,6 +874,7 @@
       <div class="item"><div class="item-icon">🌲</div><div class="item-content"><div class="item-label">Afternoon</div><div class="item-text">Okunoin Cemetery Walk</div><div class="item-sub">2km cedar forest path, 200,000 graves, lanterns at dusk — one of the most atmospheric walks in Japan</div></div></div>
       <div class="item"><div class="item-icon">⛩️</div><div class="item-content"><div class="item-label">Visit</div><div class="item-text">Kongobuji Temple &amp; Rock Garden</div><div class="item-sub">Japan's largest rock garden — 140 granite stones in a sea of white gravel</div></div></div>
       <div class="item"><div class="item-icon">🍱</div><div class="item-content"><div class="item-label">Dinner · 17:30</div><div class="item-text">Shojin Ryori · Buddhist vegetarian kaiseki</div><div class="item-sub">Served until 19:00 · Portions can be light — bring snacks · No gluten-free option · Public bath 16:30–20:30</div></div></div>
+      <div class="item"><div class="item-icon">💡</div><div class="item-content"><div class="item-label">Koyasan Tips</div><div class="item-text">Key timings to remember</div><div class="item-sub">Check-in strictly 15:00–17:00 · From Wakayama leave by noon · Dinner 17:30–19:00 · Public bath 16:30–20:30 only · Morning ceremony 07:00 DO NOT MISS · Portions light — bring snacks for Maya · No gluten-free option</div></div></div>
     </div>
   </div>
 
@@ -729,6 +901,7 @@
     <div class="day-body">
       <div class="item"><div class="item-icon">🐟</div><div class="item-content"><div class="item-label">Morning</div><div class="item-text">Kuromon Ichiba Market</div><div class="item-sub">Osaka's "Kitchen" — crab claws on a stick, fresh oysters, wagyu skewers. Arrive 9am before it fills up</div></div></div>
       <div class="item"><div class="item-icon">🎏</div><div class="item-content"><div class="item-label">Evening · from 18:00</div><div class="item-text">Yoiyama · Gion Matsuri Eve · Kyoto</div><div class="item-sub">Streets close 18:00–23:00. Float lanterns lit up. Food stalls everywhere. One of the great festival evenings in Asia. 15 min on Shinkansen from Osaka</div></div></div>
+      <div class="item"><div class="item-icon">💡</div><div class="item-content"><div class="item-label">Gion Matsuri Tips</div><div class="item-text">Main procession (Yamahoko Junko) — 18 July from 09:00</div><div class="item-sub">Streets close from 18:00 tonight · Can board floats ¥500–1,000 · Historic houses open artworks to public (Byobu Matsuri) · Kyoto is 15 min from Osaka by Shinkansen</div></div></div>
     </div>
   </div>
 
@@ -758,7 +931,7 @@
       <div class="item"><div class="item-icon">✨</div><div class="item-content"><div class="item-label">Afternoon</div><div class="item-text">Kinkaku-ji (Golden Pavilion) or Philosopher's Path</div><div class="item-sub">Philosopher's Path: 2km canal walk lined with cherry trees — serene, beautiful even without blossom</div></div></div>
       <div class="item"><div class="item-icon">🍽️</div><div class="item-content"><div class="item-label">19:00 · Confirmed</div><div class="item-text">Kikunoi Honten · 3 Michelin Stars</div><div class="item-sub">¥33,000pp · 17 July · Higashiyama district · Summer kaiseki — ayu sweetfish, young ginger, Kyoto heirloom vegetables · Allow 2.5–3 hrs · Smart casual dress · Take taxi from Gion (~15 min) · Walk Ninenzaka &amp; Sannenzaka after dinner <span class="tag tag-booked">Booked</span></div></div></div>
       <div class="item"><div class="item-icon">🌙</div><div class="item-content"><div class="item-label">After Dinner</div><div class="item-text">Walk Higashiyama lanes at night</div><div class="item-sub">Ninenzaka &amp; Sannenzaka cobbled streets — lantern-lit, extraordinary atmosphere</div></div></div>
-      <div class="item"><div class="item-icon">🚌</div><div class="item-content"><div class="item-label">Late Night · To Book</div><div class="item-text">Kintetsu Overnight Bus → Hiroshima</div><div class="item-sub">Book via willer-travel.com/en/ or kosokubus.com/en/ · Departs late evening 19 July · <span class="tag tag-todo">⏰ Book Soon</span></div></div></div>
+      <div class="item"><div class="item-icon">🚅</div><div class="item-content"><div class="item-label">Travel · 19 July · Booking Requested</div><div class="item-text">Kyoto → Hiroshima · Nozomi Shinkansen</div><div class="item-sub"><span class="tag tag-todo">Awaiting Confirmation</span> · Requested 15:00–15:30 departure · ~¥10,500pp · 1h40 · Booking via shinkansen-ticket.com · Confirmation to tuninroy@gmail.com · Sit left side seats A/B for Seto Inland Sea views around Okayama · Car 7, rows 3–10 · Buy ekiben at Kyoto Station before boarding</div></div></div>
     </div>
   </div>
 </section>
@@ -784,6 +957,7 @@
       <div class="item"><div class="item-icon">🕊️</div><div class="item-content"><div class="item-label">Afternoon</div><div class="item-text">Peace Memorial Museum &amp; Park</div><div class="item-sub">Allow 2–3 hours. Among the most profoundly moving museum experiences in the world. The A-Bomb Dome is a 1-min walk</div></div></div>
       <div class="item"><div class="item-icon">🌊</div><div class="item-content"><div class="item-label">Evening Walk</div><div class="item-text">Motoyasu River at dusk</div><div class="item-sub">The river that runs alongside the Dome — sit by the water as the light fades</div></div></div>
       <div class="item"><div class="item-icon">🍽️</div><div class="item-content"><div class="item-label">Dinner · Special</div><div class="item-text">Seasonal Cuisine Nakashima</div><div class="item-sub">¥20,790pp · Only Hiroshima restaurant with 3 Michelin stars · Theatrical setting, curtained stage doors, carved-wood panels · Chef comes out for photos after · Book opens ~2 months ahead <span class="tag tag-special">Book Direct</span></div></div></div>
+      <div class="item"><div class="item-icon">💡</div><div class="item-content"><div class="item-label">Nakashima Tips</div><div class="item-text">Set menu only · Chef greets every table after service</div><div class="item-sub">Book direct — no known surcharge platform · Reservations open ~2 months ahead · No walk-ins</div></div></div>
     </div>
   </div>
 
@@ -795,11 +969,12 @@
     </div>
     <div class="day-body">
       <div class="item"><div class="item-icon">⛴️</div><div class="item-content"><div class="item-label">Transport</div><div class="item-text">Ferry from Hiroshima Pier · ~10 min</div><div class="item-sub">JR Pass covers the ferry — take it from Miyajima-guchi</div></div></div>
+      <div class="item"><div class="item-icon">🌊</div><div class="item-content"><div class="item-label">Tide Tip</div><div class="item-text">Check tide times before you go</div><div class="item-sub">The floating torii gate illusion works best at high tide · Check willyweather.com in advance and plan your visit timing accordingly</div></div></div>
       <div class="item"><div class="item-icon">⛩️</div><div class="item-content"><div class="item-label">Morning</div><div class="item-text">Itsukushima Shrine &amp; Floating Torii Gate</div><div class="item-sub">Check tide times — the famous floating illusion works best at high tide. Check before you go</div></div></div>
       <div class="item"><div class="item-icon">🏔️</div><div class="item-content"><div class="item-label">Hike</div><div class="item-text">Mount Misen · Cable car available</div><div class="item-sub">Views over the Seto Inland Sea — on a clear day you can see to Hiroshima. Allow 2–3 hrs</div></div></div>
       <div class="item"><div class="item-icon">🦌</div><div class="item-content"><div class="item-label">All Day</div><div class="item-text">Free-roaming deer</div><div class="item-sub">They will attempt to eat your map. This is fine and expected</div></div></div>
       <div class="item"><div class="item-icon">🦪</div><div class="item-content"><div class="item-label">Lunch</div><div class="item-text">Grilled Oysters · Miyajima specialty</div><div class="item-sub">The island produces some of Japan's finest oysters — grilled over charcoal on the waterfront stalls</div></div></div>
-      <div class="item"><div class="item-icon">🚆</div><div class="item-content"><div class="item-label">Travel · Book from 21 June</div><div class="item-text">Hiroshima → Tokyo · Nozomi Shinkansen</div><div class="item-sub">~¥20,000pp · 4 hrs · Tickets release 10am JST on 21 June (1 month ahead) · Book via shinkansen-ticket.com or japan-bullettrain.com — international cards accepted, QR code sent, collect tickets at any JR machine · Up to 20% saving if booked 28+ days ahead <span class="tag tag-todo">⏰ Reminder: 21 June</span></div></div></div>
+      <div class="item"><div class="item-icon">🚌</div><div class="item-content"><div class="item-label">Travel · Overnight Bus · To Book</div><div class="item-text">Hiroshima → Tokyo · Overnight Bus</div><div class="item-sub"><span class="tag tag-todo">⏰ Book Soon</span> · ~¥6,500pp · ~12 hrs · Book premium or semi-premium seat (2+1 config) · willer-travel.com/en/ or kosokubus.com/en/ · July peak — book early</div></div></div>
     </div>
   </div>
 </section>
@@ -839,6 +1014,8 @@
       <div class="item"><div class="item-icon">🌅</div><div class="item-content"><div class="item-label">Morning</div><div class="item-text">Tsukiji breakfast or Asakusa café</div><div class="item-sub">Final morning in Japan — take it slow</div></div></div>
       <div class="item"><div class="item-icon">🚆</div><div class="item-content"><div class="item-label">Airport Transfer</div><div class="item-text">Ueno → Narita Express (N'EX)</div><div class="item-sub">Ueno is 1 subway stop from Asakusa · N'EX from Ueno ~60 min to Narita · Booking.com airport transfer also booked</div></div></div>
       <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight · Leg 1</div><div class="item-text">ET673 · Narita → Addis Ababa</div><div class="item-sub">Departs 20h40 · Arrives 06h55 24 Jul</div></div></div>
+      <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight · Leg 2</div><div class="item-text">ET847 · Addis Ababa → Cape Town</div><div class="item-sub">Departs 08h40 · Arrives 14h35 24 Jul</div></div></div>
+      <div class="item"><div class="item-icon">💡</div><div class="item-content"><div class="item-label">Departure Reminder</div><div class="item-text">Leave OMO3 Asakusa by 17:00</div><div class="item-sub">ET673 departs Narita 20h40 · Subway Asakusa→Ueno (1 stop) then N'EX ~60 min · Allow 3 hours at airport · Booking.com transfer confirmed · ET847 Addis→CPT departs 08h40 24 Jul</div></div></div>
     </div>
   </div>
 </section>
@@ -857,18 +1034,17 @@
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Nine Tree by Parnas Seoul Myeongdong 2</div><div class="booking-meta">2–4 July · Confirmed via Booking.com</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Airport Transfer · Incheon → Nine Tree</div><div class="booking-meta">2 July · Booked via Booking.com · Huayun Trip · R850 · Private car</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Hotel Niwa Tokyo</div><div class="booking-meta">5–8 July · Confirmed</div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Seafood &amp; Food Miharashiso · Shakotan</div><div class="booking-meta">8–10 July · Confirmed · Rinkoso email awaited — if no vacancy, Miharashiso is primary</div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Nagomi no Yado IIDA · Shakotan</div><div class="booking-meta">9–11 July · Waitlisted — awaiting confirmation</div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">JR Inn Chitose · airport night</div><div class="booking-meta">10 July · Confirmed · <a href="https://www.jr-inn.jp/chitose/en/" target="_blank" class="hotel-link">🔗 jr-inn.jp</a></div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Seafood &amp; Food Miharashiso · Shakotan</div><div class="booking-meta">8–10 July · Confirmed via Agoda</div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">New Chitose Inn · airport night</div><div class="booking-meta">10–11 July · Confirmed</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">AirBnB · Miyakojima (near Shimojishima)</div><div class="booking-meta">11–14 July · Confirmed</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Car Hire · Miyakojima (Klook)</div><div class="booking-meta">11–14 July · Confirmed</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">S3 Wakayama Capsule Hotel</div><div class="booking-meta">14 July · Confirmed · Separate M/F sections</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Fudo-in Temple · Koyasan</div><div class="booking-meta">15 July · Confirmed · Check-in 15:00–17:00</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Osaka · 2 nights</div><div class="booking-meta">16–17 July · Flexible — decide on the day between downtown or rural (Kinosaki/Yoshino)</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Miru Kyoto Gion · 2 nights</div><div class="booking-meta">17–19 July · Confirmed</div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-red"></div><div><div class="booking-name">⚠️ Overnight Bus · Kyoto → Hiroshima</div><div class="booking-meta">19 July night · willer-travel.com/en/ or kosokubus.com/en/ · Book soon</div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Shinkansen · Kyoto → Hiroshima</div><div class="booking-meta">19 July · 15:00–15:30 · Booking requested via shinkansen-ticket.com · Awaiting confirmation</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">THE KNOT HIROSHIMA</div><div class="booking-meta">20 July · Confirmed · Rooftop bar over Peace Park · <a href="https://hotel-the-knot.jp/hiroshima/" target="_blank" class="hotel-link">🔗 hotel-the-knot.jp</a></div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Hiroshima → Tokyo · Nozomi Shinkansen</div><div class="booking-meta">Book from 21 June · shinkansen-ticket.com · ~¥20,000pp</div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Overnight Bus · Hiroshima → Tokyo</div><div class="booking-meta">Book soon · willer-travel.com/en/ or kosokubus.com/en/ · ~¥6,500pp · Premium seat</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">Luggage Forwarding · Haneda → OMO3</div><div class="booking-meta">11 July · Request sent to OMO3 · Awaiting confirmation · Yamato counter at Haneda Terminal 3</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">OMO3 Asakusa by Hoshino Resorts</div><div class="booking-meta">21–23 July · Confirmed · Deluxe twin</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-green"></div><div><div class="booking-name">Kikunoi Honten · Kyoto</div><div class="booking-meta">17 July · 19:00 · Confirmed · ¥33,000pp · Higashiyama</div></div></div>
@@ -889,24 +1065,24 @@
   </div>
   <div class="tips-grid">
     <div class="tip-card">
+      <div class="tip-category">Driving in Japan</div>
+      <div class="tip-text">International Driving Permit (IDP) is mandatory — obtain at AA South Africa before departure. Drive on the left (same as SA). ETC card useful for toll roads. Hokkaido and Miyakojima are both easy, low-traffic driving.</div>
+    </div>
+    <div class="tip-card">
       <div class="tip-category">Koyasan · Fudo-in</div>
       <div class="tip-text">Check-in strictly 15:00–17:00. From Wakayama, leave by noon. Dinner 17:30–19:00. Public bath 16:30–20:30 only. Morning ceremony 07:00 — don't skip it. Portions at dinner are light — bring snacks for Maya. No gluten-free option.</div>
     </div>
     <div class="tip-card">
       <div class="tip-category">Gion Matsuri · Kyoto</div>
-      <div class="tip-text">Main procession (Yamahoko Junko) starts 9am on 17 July. Streets close from 18:00 on eve (16 Jul). Can board floats ¥500–1,000. Historic houses open artworks to public (Byobu Matsuri). Kyoto is 15 min from Osaka by Shinkansen.</div>
+      <div class="tip-text">Main procession (Yamahoko Junko) starts 9am on 18 July. Streets close from 18:00 on eve (17 Jul). Can board floats ¥500–1,000. Historic houses open artworks to public (Byobu Matsuri).</div>
     </div>
     <div class="tip-card">
       <div class="tip-category">Kikunoi Honten · 17 July 19:00</div>
-      <div class="tip-text">Confirmed 17 July at 19:00. Smart casual — no shorts or sandals. Allow 2.5–3 hours, finishing ~21:30. Take taxi from Gion (~15 min, ~¥1,500). Walk Ninenzaka &amp; Sannenzaka lantern-lit lanes after dinner. Note cancellation policy — significant fee for late cancellations.</div>
+      <div class="tip-text">Confirmed 17 July at 19:00. Smart casual — no shorts or sandals. Allow 2.5–3 hours, finishing ~21:30. Take taxi from Gion (~15 min, ~¥1,500). Walk Ninenzaka &amp; Sannenzaka lantern-lit lanes after dinner. Note strict cancellation policy.</div>
     </div>
     <div class="tip-card">
       <div class="tip-category">Nakashima · Hiroshima</div>
-      <div class="tip-text">Reservations open approximately 2 months ahead. Set menu only at ¥20,790pp. 3 Michelin stars. Chef comes out for photos after service. Book direct — no known surcharge platform.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-category">Driving in Japan</div>
-      <div class="tip-text">International Driving Permit (IDP) is mandatory — obtain at AA South Africa before departure. Drive on the left (same as SA). ETC card useful for toll roads. Hokkaido and Miyakojima are both easy, low-traffic driving.</div>
+      <div class="tip-text">Set menu only at ¥20,790pp. 3 Michelin stars. Chef comes out for photos after service. Book direct — no known surcharge platform. Reservations open ~2 months ahead.</div>
     </div>
     <div class="tip-card">
       <div class="tip-category">Miyajima Tides</div>
@@ -914,13 +1090,21 @@
     </div>
     <div class="tip-card">
       <div class="tip-category">Shakotan · Sea Urchin</div>
-      <div class="tip-text">Fishing ban lifts in June — July is peak season. Ask your inn about the uni don lunch at Rinkousou nearby. The drive along Route 229 is spectacular — pull over at viewpoints along the coast.</div>
+      <div class="tip-text">Fishing ban lifts in June — July is peak season. The drive along Route 229 is spectacular — pull over at viewpoints along the coast.</div>
     </div>
     <div class="tip-card">
-      <div class="tip-category">Tokyo · Narita</div>
+      <div class="tip-category">Kyoto → Hiroshima · Shinkansen</div>
+      <div class="tip-text">19 July · ~15:00–15:30 departure · 1h40 · Sit left side seats A/B for Seto Inland Sea views around Okayama. Car 7, rows 3–10. Buy an ekiben (station bento) at Kyoto Station before boarding — a quintessential Shinkansen experience.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-category">Hiroshima → Tokyo · Overnight Bus</div>
+      <div class="tip-text">~12 hours · Book premium or semi-premium seat (2+1 configuration) for comfort. Book early — July peak fills fast. Book at willer-travel.com/en/ or kosokubus.com/en/</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-category">Tokyo · Narita Departure</div>
       <div class="tip-text">ET673 departs Narita at 20h40 on 23 July. Take subway from Asakusa to Ueno (1 stop), then Narita Express (N'EX) — about 60 min total. Allow 3 hours before departure, so leave hotel by 17h00. Booking.com airport transfer also booked.</div>
     </div>
-    <div class="tip-card">
+        <div class="tip-card">
       <div class="tip-category">Saving to Home Screen</div>
       <div class="tip-text">iPhone: tap Share → "Add to Home Screen". Android: tap menu (⋮) → "Add to Home Screen". The app works offline once loaded.</div>
     </div>
@@ -964,14 +1148,14 @@ try {
 
 var TRIP_EVENTS = [
   { id: 'reminder-nakashima',  type: 'reminder', icon: '⏰', title: 'Book Nakashima Restaurant', body: 'Reservations now open for 20 July dinner · 3 Michelin stars · ¥20,790pp · Book direct.', date: '2026-05-20' },
-  { id: 'reminder-shinkansen', type: 'reminder', icon: '⏰', title: 'Book Shinkansen Hiroshima→Tokyo', body: 'Tickets release at 10:00am JST today · Book at shinkansen-ticket.com · ~¥20,000pp.', date: '2026-06-21' },
+  { id: 'reminder-obus-htokyo', type: 'reminder', icon: '⏰', title: 'Book Overnight Bus Hiroshima→Tokyo', body: 'Book NOW — July peak fills fast · willer-travel.com/en/ · ~¥6,500pp · Book premium/semi-premium seat.', date: '2026-04-15' },
   { id: 'reminder-teamlab',    type: 'reminder', icon: '⏰', title: 'Book teamLab Borderless', body: 'Tickets on sale 1 May · teamlab.art · Azabudai Hills · Morning slot recommended.', date: '2026-05-01' },
   { id: 'reminder-yoroniku',   type: 'reminder', icon: '⏰', title: 'Book Ebisu Yoroniku', body: 'Reservations open on Tabelog at 11am JST on 1 June · Book for Tokyo I dinner (5-7 July).', date: '2026-06-01' },
-  { id: 'reminder-obus',       type: 'reminder', icon: '⏰', title: 'Book Overnight Bus Kyoto→Hiroshima', body: 'Book at willer-travel.com/en/ · 19 July night.', date: '2026-04-15' },
+  { id: 'reminder-kyoto-shin', type: 'reminder', icon: '⏰', title: 'Shinkansen Kyoto→Hiroshima', body: 'Booking requested via shinkansen-ticket.com · Awaiting confirmation to tuninroy@gmail.com · Requested 19 July 15:00–15:30.', date: '2026-04-15' },
   { id: 'checkin-ninetree',    type: 'checkin', icon: '🏨', title: 'Check-in: Nine Tree Seoul today', body: 'Nine Tree by Parnas Myeongdong 2 · Check-in from 15:00 · Huayun Trip transfer booked.', date: '2026-07-02' },
   { id: 'checkin-niwa',        type: 'checkin', icon: '🏨', title: 'Check-in: Hotel Niwa Tokyo today', body: 'Hotel Niwa Tokyo · Chiyoda City · Check-in from 15:00.', date: '2026-07-04' },
   { id: 'checkin-miharashiso', type: 'checkin', icon: '🏠', title: 'Check-in: Miharashiso today', body: 'Seafood & Food Miharashiso · Shakotan · Check-in from 15:00. Lake Toyako fireworks at 20:30!', date: '2026-07-08' },
-  { id: 'checkin-jrinn',       type: 'checkin', icon: '🏨', title: 'Check-in: JR Inn Chitose today', body: 'JR Inn Chitose · 10 min train to airport tomorrow.', date: '2026-07-10' },
+  { id: 'checkin-newchitose',  type: 'checkin', icon: '🏨', title: 'Check-in: New Chitose Inn today', body: 'New Chitose Inn · Early flight tomorrow 08h15 — set your alarm!', date: '2026-07-10' },
   { id: 'checkin-miyako',      type: 'checkin', icon: '🏠', title: 'Check-in: Miyakojima today', body: 'Hotel Yah · Collect car hire via Klook. IDP required.', date: '2026-07-11' },
   { id: 'checkin-wakayama',    type: 'checkin', icon: '🏨', title: 'Check-in: S3 Wakayama tonight', body: 'S3 Capsule Hotel · Separate male/female sections.', date: '2026-07-14' },
   { id: 'checkin-koyasan',     type: 'checkin', icon: '🏯', title: '⚠️ Koyasan check-in 15:00–17:00 ONLY', body: 'Fudo-in Temple · MUST arrive 15:00–17:00. Dinner 17:30. DO NOT BE LATE.', date: '2026-07-15' },
