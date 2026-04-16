@@ -504,7 +504,25 @@
   .map-city { font-size:18px; }
   .map-dates { font-family:'DM Mono',monospace; font-size:13px; color:var(--stone); }
   .map-transport { font-size:13px; color:var(--mist); margin-top:2px; }
-  </style>
+  
+  /* Nightlife collapsible */
+  .night-card { border:1px solid var(--border); border-radius:4px; margin:12px 16px; background:rgba(30,30,30,0.6); }
+  .night-header { display:flex; align-items:center; gap:12px; padding:14px 16px; cursor:pointer; user-select:none; }
+  .night-icon { font-size:22px; }
+  .night-title { flex:1; }
+  .night-label { font-family:'DM Mono',monospace; font-size:11px; color:var(--stone); letter-spacing:0.08em; text-transform:uppercase; }
+  .night-name { font-size:17px; color:var(--white); margin-top:2px; }
+  .night-chevron { color:var(--stone); font-size:18px; transition:transform 0.2s; }
+  .night-card.open .night-chevron { transform:rotate(180deg); }
+  .night-body { display:none; padding:0 16px 16px; }
+  .night-card.open .night-body { display:block; }
+  .night-section { margin-bottom:12px; }
+  .night-section-title { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; margin-top:12px; }
+  .night-venue { margin-bottom:8px; }
+  .night-venue-name { font-size:15px; font-weight:500; color:var(--white); }
+  .night-venue-desc { font-size:13px; color:var(--mist); line-height:1.5; margin-top:2px; }
+  .night-practical { font-size:13px; color:var(--stone); border-top:1px solid var(--border); padding-top:10px; margin-top:12px; }
+</style>
 
   <div class="summary-grid">
     <div class="summary-row">
@@ -523,7 +541,7 @@
       <div class="s-detail">Gyeongbokgung · Bukchon · Gwangjang Market</div>
     </div>
     <div class="summary-row">
-      <div class="s-date">4 Jul</div>
+      <div class="s-date">5 Jul</div>
       <div class="s-loc">Seoul → Tokyo</div>
       <div class="s-detail"><span class="s-tag s-flight">✈️ ET672</span> 17:15 → 19:40 · <span class="s-tag s-hotel">🏨 Hotel Niwa</span></div>
     </div>
@@ -616,14 +634,112 @@
 
   <div class="summary-map">
     <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--stone);margin-bottom:16px;letter-spacing:0.08em;">ROUTE · KOREA &amp; JAPAN</div>
-    <div style="margin-bottom:16px;"><a href="https://www.google.com/maps/dir/Seoul+South+Korea/Tokyo+Japan/Hokkaido+Japan/Miyakojima+Okinawa/Kyoto+Japan/Hiroshima+Japan/Asakusa+Tokyo+Japan" target="_blank" style="display:inline-block;background:rgba(106,184,200,0.12);border:1px solid #6ab8c8;color:#6ab8c8;font-family:'DM Mono',monospace;font-size:13px;padding:10px 18px;text-decoration:none;letter-spacing:0.08em;border-radius:2px;">🗺️ Open Full Route in Google Maps</a></div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--stone);margin-bottom:12px;letter-spacing:0.08em;">ROUTE MAP · SEOUL → TOKYO → HOKKAIDO → MIYAKOJIMA → KANSAI → HIROSHIMA → TOKYO</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:800px;min-width:500px;height:auto;display:block;">
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#6ab8c8" opacity="0.7"/>
+        </marker>
+        <marker id="arr-train" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#f0c040" opacity="0.8"/>
+        </marker>
+        <marker id="arr-bus" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#b0b0b0" opacity="0.7"/>
+        </marker>
+        <marker id="arr-drive" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#88cc88" opacity="0.8"/>
+        </marker>
+      </defs>
+      <!-- Background -->
+      <rect width="800" height="420" fill="none"/>
+      <!-- Land masses (simplified) -->
+      <!-- Korea peninsula -->
+      <path d="M180,80 L210,70 L230,90 L225,130 L210,160 L195,155 L180,140 L170,110 Z" fill="rgba(60,65,50,0.4)" stroke="rgba(100,110,80,0.3)" stroke-width="1"/>
+      <!-- Japan main island (Honshu) -->
+      <path d="M320,90 L380,75 L440,80 L490,95 L510,115 L500,140 L470,155 L430,145 L390,150 L360,140 L330,125 L315,108 Z" fill="rgba(60,65,50,0.4)" stroke="rgba(100,110,80,0.3)" stroke-width="1"/>
+      <!-- Hokkaido -->
+      <path d="M430,50 L480,42 L510,55 L505,78 L480,85 L450,80 L430,68 Z" fill="rgba(60,65,50,0.4)" stroke="rgba(100,110,80,0.3)" stroke-width="1"/>
+      <!-- Kyushu -->
+      <path d="M330,175 L355,168 L365,185 L360,205 L340,210 L325,200 L320,185 Z" fill="rgba(60,65,50,0.4)" stroke="rgba(100,110,80,0.3)" stroke-width="1"/>
+      <!-- Okinawa/Miyakojima (very small) -->
+      <ellipse cx="390" cy="260" rx="12" ry="6" fill="rgba(60,65,50,0.4)" stroke="rgba(100,110,80,0.3)" stroke-width="1"/>
+
+      <!-- CITY DOTS -->
+      <!-- Seoul -->
+      <circle cx="195" cy="120" r="7" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+      <!-- Tokyo -->
+      <circle cx="470" cy="130" r="7" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+      <!-- Hokkaido/Shakotan -->
+      <circle cx="460" cy="66" r="6" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+      <!-- Miyakojima -->
+      <circle cx="390" cy="260" r="6" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+      <!-- Osaka/Kansai -->
+      <circle cx="410" cy="148" r="6" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+      <!-- Hiroshima -->
+      <circle cx="375" cy="148" r="6" fill="#6ab8c8" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
+
+      <!-- FLIGHT LINES (dashed curves) ✈️ -->
+      <!-- Seoul → Tokyo -->
+      <path d="M202,120 Q330,60 463,130" fill="none" stroke="#6ab8c8" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arr)" opacity="0.85"/>
+      <!-- Tokyo → Hokkaido -->
+      <path d="M468,124 Q468,90 462,72" fill="none" stroke="#6ab8c8" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arr)" opacity="0.85"/>
+      <!-- Hokkaido → Miyakojima (via Haneda) -->
+      <path d="M458,70 Q470,130 395,256" fill="none" stroke="#6ab8c8" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arr)" opacity="0.85"/>
+      <!-- Miyakojima → Osaka KIX -->
+      <path d="M393,256 Q405,200 407,154" fill="none" stroke="#6ab8c8" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arr)" opacity="0.85"/>
+
+      <!-- SHINKANSEN (solid yellow) 🚅 -->
+      <!-- Kyoto→Hiroshima -->
+      <path d="M410,148 L378,148" fill="none" stroke="#f0c040" stroke-width="2.5" marker-end="url(#arr-train)" opacity="0.9"/>
+
+      <!-- OVERNIGHT BUS (dotted grey) 🚌 -->
+      <!-- Hiroshima→Tokyo -->
+      <path d="M373,145 Q380,100 463,132" fill="none" stroke="#b0b0b0" stroke-width="1.8" stroke-dasharray="3,5" marker-end="url(#arr-bus)" opacity="0.75"/>
+
+      <!-- ROAD (dashed green) 🚗 -->
+      <!-- Chitose→Toyako→Shakotan -->
+      <path d="M462,72 Q448,68 445,65" fill="none" stroke="#88cc88" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-drive)" opacity="0.8"/>
+      <!-- Shakotan→Otaru→Chitose -->
+      <path d="M443,64 Q455,60 462,69" fill="none" stroke="#88cc88" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-drive)" opacity="0.8"/>
+
+      <!-- LABELS -->
+      <text x="185" y="107" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="middle">Seoul</text>
+      <text x="185" y="118" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="middle">2–5 Jul</text>
+      <text x="482" y="128" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="start">Tokyo</text>
+      <text x="482" y="139" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="start">5–8 Jul</text>
+      <text x="473" y="63" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="start">Hokkaido</text>
+      <text x="473" y="74" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="start">8–11 Jul</text>
+      <text x="390" y="277" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="middle">Miyakojima</text>
+      <text x="390" y="288" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="middle">11–14 Jul</text>
+      <text x="420" y="162" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="start">Kansai</text>
+      <text x="420" y="172" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="start">14–19 Jul</text>
+      <text x="362" y="162" font-family="monospace" font-size="11" fill="#e8e8e0" text-anchor="end">Hiroshima</text>
+      <text x="362" y="172" font-family="monospace" font-size="9" fill="#8a8a80" text-anchor="end">19–21 Jul</text>
+
+      <!-- LEGEND -->
+      <rect x="10" y="370" width="780" height="45" fill="rgba(20,20,20,0.5)" rx="4"/>
+      <line x1="20" y1="388" x2="55" y2="388" stroke="#6ab8c8" stroke-width="1.8" stroke-dasharray="6,4"/>
+      <text x="60" y="392" font-family="monospace" font-size="10" fill="#8a8a80">✈ Flight</text>
+      <line x1="130" y1="388" x2="165" y2="388" stroke="#f0c040" stroke-width="2.5"/>
+      <text x="170" y="392" font-family="monospace" font-size="10" fill="#8a8a80">🚅 Shinkansen</text>
+      <line x1="270" y1="388" x2="305" y2="388" stroke="#b0b0b0" stroke-width="1.8" stroke-dasharray="3,5"/>
+      <text x="310" y="392" font-family="monospace" font-size="10" fill="#8a8a80">🚌 Overnight Bus</text>
+      <line x1="430" y1="388" x2="465" y2="388" stroke="#88cc88" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="470" y="392" font-family="monospace" font-size="10" fill="#8a8a80">🚗 Drive</text>
+
+      <!-- Note about Seoul flights going off-left -->
+      <text x="10" y="410" font-family="monospace" font-size="9" fill="#555550">CPT → Addis → Seoul (not shown) · Tokyo → Addis → CPT (not shown)</text>
+    </svg>
+    </div>
+
     <div style="font-size:14px;color:var(--stone);margin-bottom:20px;line-height:1.5;">Total journey: Cape Town → Seoul → Tokyo → Hokkaido → Miyakojima → Kansai → Hiroshima → Tokyo → Cape Town · 23 days · ~23,000 km</div>
     <div class="map-route">
       <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🇿🇦 Cape Town</div><div class="map-dates">1 Jul</div><div class="map-transport">✈️ ET844 → Addis · ET672 → Seoul</div></div></div>
       <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
       <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🇰🇷 Seoul</div><div class="map-dates">2–5 Jul · 3 nights</div><div class="map-transport">✈️ ET672 → Tokyo Narita</div></div></div>
       <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
-      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🗼 Tokyo I</div><div class="map-dates">4–8 Jul · 4 nights</div><div class="map-transport">✈️ SKY719 → New Chitose</div></div></div>
+      <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🗼 Tokyo I</div><div class="map-dates">5–8 Jul · 3 nights</div><div class="map-transport">✈️ SKY719 → New Chitose</div></div></div>
       <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
       <div class="map-stop"><div class="map-dot"></div><div class="map-info"><div class="map-city">🦑 Hokkaido</div><div class="map-dates">8–11 Jul · 3 nights</div><div class="map-transport">✈️ SKY706 → Haneda · SKY613 → Shimojishima</div></div></div>
       <div class="map-stop"><div style="width:2px;background:var(--border);flex-shrink:0;min-height:20px;margin-left:5px;"></div></div>
@@ -692,7 +808,51 @@
     </div>
   </div>
 
-      <div class="item"><div class="item-icon">🎧</div><div class="item-content"><div class="item-label">🎧 Nightlife · 3 or 4 July</div><div class="item-text">Seoul Clubbing — best on night of 3 or 4 July (no early starts) · <a href="https://maps.google.com/?q=Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Itaewon</a> vs <a href="https://maps.google.com/?q=Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hongdae</a></div><div class="item-sub"><strong style="color:var(--gold)">Deep/Progressive House:</strong> <a href="https://maps.google.com/?q=Cakeshop+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Cakeshop</a> (Itaewon) — underground warehouse space, genre-defying programming mixing house, techno and bass, consistently books international names. Probably Seoul's most credible club for underground electronic music. Thu–Sun · <a href="https://maps.google.com/?q=BBCB+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">BBCB</a> (Itaewon) — Brutalist concrete aesthetic, two stages: Beton Brut for high-energy house/techno and Concrete Bar for deeper, more minimal sounds · <a href="https://maps.google.com/?q=Modeci+Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Modeci</a> (Hongdae) — Funktion-One sound system, deep house focus, wooden dancefloor, rooftop city views, has hosted Theo Parrish and Larry Heard · <strong style="color:var(--gold)">Hip Hop/Funk/R&amp;B:</strong> <a href="https://maps.google.com/?q=Club+Rollie+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Club Rollie</a> (Itaewon) — new school hip hop specialist, JBL sound, led by Red Bull Thre3style champion · <a href="https://maps.google.com/?q=NB2+Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">NB2</a> (Hongdae) — YG Entertainment-owned, old school hip hop focus, open until 6am, cheap drinks, consistently packed · Brown (Hapjeong) — hip hop, R&amp;B, dancehall and funk, 9pm–6am, laid-back · <a href="https://maps.google.com/?q=The+Henz+Club+Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">The Henz Club</a> (Hongdae) — legendary underground hip hop, Funktion-One sound system, resident DJs 360sounds and Deadend · <strong style="color:var(--gold)">Area comparison:</strong> Itaewon is more international, edgier underground scene, older mixed crowd. Hongdae is younger, more energetic, student crowd, cheaper drinks. Both 20 min from Nine Tree by taxi/subway</div></div></div>
+      <div class="night-card" id="night-seoul">
+        <div class="night-header" onclick="toggleNight('night-seoul')">
+          <div class="night-icon">🎧</div>
+          <div class="night-title">
+            <div class="night-label">Nightlife · 3 or 4 July</div>
+            <div class="night-name">Seoul Clubs — Itaewon & Hongdae</div>
+          </div>
+          <div class="night-chevron">▾</div>
+        </div>
+        <div class="night-body">
+          <div class="night-section-title">Deep House / Progressive House / Techno</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Faust+Club+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Faust</a> · Itaewon · RA #1 in Seoul</div>
+            <div class="night-venue-desc">Three floors, consistently books serious international artists — Boris, nthng, Cryptofauna. Resident DJs Mars Parck and Suman are exceptional. Dark, serious, music-first crowd. The best club in Seoul full stop. Check ra.co/clubs/106806 for lineup.</div>
+          </div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=BBCB+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">BBCB</a> (Beton Brut + Concrete Bar) · Itaewon · RA #2</div>
+            <div class="night-venue-desc">Two rooms in one basement: Beton Brut for heavier techno and high-energy house, Concrete Bar for deeper minimal sounds. Celebrating 9 years — one of Seoul's most respected underground institutions. ra.co/clubs/127189</div>
+          </div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Cakeshop+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Cakeshop</a> · Itaewon · RA #4</div>
+            <div class="night-venue-desc">Warehouse-style basement, genre-spanning — house, techno, bass, experimental. Has hosted Machine Girl, Bianca Oblivion, Shannen SP. Their in-house label Carousel Records is strong. Runs own Boiler Room sessions. Thu–Sun.</div>
+          </div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Vurt+Club+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">vurt.</a> · Mapo · RA #5</div>
+            <div class="night-venue-desc">Small concrete bunker in Hapjeong, focused on underground techno and minimal house. Open 3–4 times per month, quality over quantity. Local and international bookings — Tokyo acts visit regularly. ra.co/clubs/101673</div>
+          </div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Modeci+Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Modeci</a> · Hongdae · Funktion One</div>
+            <div class="night-venue-desc">5th floor with rooftop city views, Funktion One sound system, deep house focus. More accessible vibe than Faust/BBCB. Active on RA. ra.co/clubs/140937</div>
+          </div>
+          <div class="night-section-title">Hip Hop / Funk / R&B</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=The+Henz+Club+Hongdae+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">The Henz Club</a> · Hongdae</div>
+            <div class="night-venue-desc">The underground hip hop institution in Seoul — Funktion One system, resident crews Deadend Movement and 360sounds. Active on RA. Fashion-meets-music crowd. ra.co/clubs/128746</div>
+          </div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Pistil+Club+Itaewon+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Pistil</a> · Itaewon · Cakeshop sister venue</div>
+            <div class="night-venue-desc">Mellower than Cakeshop — deeper sounds, better food, Thursdays often free. Good starting point if you want to warm up before heading to Faust. ra.co/clubs/104589</div>
+          </div>
+          <div class="night-practical">
+            <strong>How to plan:</strong> Check ra.co/events/kr/seoul for exact lineups in early July — DJs are everything. Cover ₩10,000–25,000. Last subway before midnight — stay till 5am first train or take a taxi. Itaewon is more international, serious music crowd. Hongdae is younger, cheaper, more energetic. Both 20 min from Nine Tree by taxi.
+          </div>
+        </div>
+      </div>
 
   <div class="day-card">
     <div class="day-header">
@@ -739,6 +899,7 @@
       <div class="item"><div class="item-icon">🐟</div><div class="item-content"><div class="item-label">Food · Morning</div><div class="item-text"><a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Tsukiji Outer Market</a> · Tokyo's greatest breakfast</div><div class="item-sub">The inner wholesale market moved to Toyosu in 2018, but the outer market (where all the food stalls are) is very much alive. Go 7:30–9:00am before tour groups arrive. Must-eat: fresh tuna rice bowl (maguro don) at a counter stall — look for queues of Japanese people, not foreigners. Tamagoyaki (rectangular sweet egg omelette) on a stick. Uni (sea urchin) if you haven't had enough in Hokkaido. Oysters. Fresh sushi at 8am is genuinely one of life's great experiences. Budget ¥1,500–3,000pp for a proper breakfast feast</div></div></div>
       <div class="item"><div class="item-icon">🎋</div><div class="item-content"><div class="item-label">Neighbourhood</div><div class="item-text"><a href="https://maps.google.com/?q=Harajuku+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Harajuku</a> · Two very different streets</div><div class="item-sub">Takeshita-dori: covered pedestrian street of wild teen fashion, crepes, overloaded bubble tea. Chaotic, fun, completely unlike anywhere else. Best after 11am when it gets busy · <a href="https://maps.google.com/?q=Omotesando+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Omotesando</a> (2 min walk from Takeshita): the exact opposite — wide tree-lined boulevard of high-end international flagships (Prada, Louis Vuitton, Comme des Garçons) designed by Tadao Ando and other architects. The buildings themselves are worth seeing. The side streets (Ura-Harajuku) between these two worlds have the best independent fashion and coffee</div></div></div>
       <div class="item"><div class="item-icon">⛩️</div><div class="item-content"><div class="item-label">Morning · Best early</div><div class="item-text"><a href="https://maps.google.com/?q=Meiji+Shrine+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Meiji Shrine</a> · Japan's most important Shinto shrine</div><div class="item-sub">Dedicated to Emperor Meiji and Empress Shoken. The forested approach (700m of gravel path lined with 120,000 trees) is serene and one of the great walks in Tokyo. Arrive before 8am to see morning prayers and occasionally traditional wedding ceremonies (Saturdays especially). Free entry. The iris garden nearby is beautiful in July. Takes 45 min to do properly</div></div></div>
+      <div class="item"><div class="item-icon">🗻</div><div class="item-content"><div class="item-label">Day Trip · If Tokyo is Too Hot — Hakone</div><div class="item-text"><a href="https://maps.google.com/?q=Hakone+Kanagawa+Japan" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hakone</a> — mountain air, Mt Fuji, volcanic valley</div><div class="item-sub">July in Tokyo can hit 35°C+ with high humidity. Hakone sits at elevation and is significantly cooler — a genuine escape. 85 minutes from Shinjuku on the <a href="https://maps.google.com/?q=Shinjuku+Station+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Romancecar express</a> (¥2,470, book at odakyu.jp, no JR Pass). Key stops: <a href="https://maps.google.com/?q=Owakudani+Hakone" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Owakudani volcanic valley</a> — sulphur vents, lunar landscape, famous black eggs (kurotamago — cooked in volcanic springs, ¥600 for 5, legend says each adds 7 years to your life). <a href="https://maps.google.com/?q=Lake+Ashi+Hakone" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Lake Ashi</a> — iconic view of Mt Fuji across the lake (cloud permitting in July — check the morning before you go). <a href="https://maps.google.com/?q=Hakone+Open+Air+Museum" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hakone Open Air Museum</a> — outdoor sculpture park with a Picasso pavilion, genuinely world-class. A full Hakone day trip uses the Hakone Free Pass (¥6,100 from Shinjuku, covers all transport within Hakone). Depart Shinjuku by 9am, back by 19:00. Worth it if the city heat is unbearable</div></div></div>
       <div class="item"><div class="item-icon">🏛️</div><div class="item-content"><div class="item-label">Free Views · Tokyo</div><div class="item-text"><a href="https://maps.google.com/?q=Tokyo+Metropolitan+Government+Building+Shinjuku" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Tokyo Metropolitan Government Building</a> · Best free observation deck</div><div class="item-sub">202m twin towers with free observation decks on the 45th floor of both North and South towers. Open until 23:00 (South) and 22:30 (North) — spectacular night views. North tower is particularly impressive. Far less crowded than Tokyo Skytree or Tokyo Tower, and completely free. 5 min walk from Shinjuku Station west exit — perfect to combine with Golden Gai and Omoide Yokocho on the same evening</div></div></div>
       <div class="item"><div class="item-icon">🌿</div><div class="item-content"><div class="item-label">Garden · Best in Tokyo</div><div class="item-text"><a href="https://maps.google.com/?q=Shinjuku+Gyoen+National+Garden+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Shinjuku Gyoen National Garden</a> · Three gardens in one</div><div class="item-sub">Tokyo's finest formal garden — 58.3 hectares combining a French formal garden, English landscape garden, and traditional Japanese garden in one space. The greenhouse has tropical plants. In July the summer flowers and greenery are at their best. ¥500 entry. Open 09:00–18:00. The best escape from urban Tokyo — inside the garden the city noise drops away completely. Note: no alcohol permitted (rare for Japan)</div></div></div>
       <div class="item"><div class="item-icon">🍶</div><div class="item-content"><div class="item-label">Evening</div><div class="item-text">Shinjuku — <a href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Golden Gai</a> &amp; <a href="https://maps.google.com/?q=Omoide+Yokocho+Shinjuku+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Omoide Yokocho</a></div><div class="item-sub">Golden Gai: 200+ tiny bars each fitting around 6 people — pick a bar by peering in the window, pay a small cover charge, talk to whoever is there. Omoide Yokocho: smoke-filled yakitori alley under the Shinjuku tracks, beer and grilled chicken, unchanged since the 1950s. Both within 5 min walk of Shinjuku Station east exit</div></div></div>
@@ -757,7 +918,37 @@
     </div>
   </div>
 
-      <div class="item"><div class="item-icon">🎧</div><div class="item-content"><div class="item-label">🎧 Nightlife · 6 or 7 July</div><div class="item-text">Tokyo Clubbing — best on 6 or 7 July · <a href="https://maps.google.com/?q=Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Shibuya</a> &amp; <a href="https://maps.google.com/?q=Shinjuku+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Shinjuku</a></div><div class="item-sub"><strong style="color:var(--gold)">Deep/Progressive House:</strong> <a href="https://maps.google.com/?q=Contact+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Contact</a> (Shibuya) — hidden under a Dogenzaka parking lot, the most respected underground club in Tokyo. World-class sound, intimate, serious music crowd. Check lineup in advance at ra.co. Fri/Sat ¥3,000–4,000 · <a href="https://maps.google.com/?q=Vent+Club+Aoyama+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">VENT</a> (Aoyama) — only real club in the Aoyama area, hi-res sound system, consistent deep house and minimal techno programming. 2 min from Omotesando station. Fri/Sat 11pm–5am · <a href="https://maps.google.com/?q=Womb+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">WOMB</a> (Shibuya) — Tokyo institution since 2000, Asia's largest mirror ball, four floors, powerful sound. More commercial than Contact/VENT but consistently strong international bookings · <strong style="color:var(--gold)">Hip Hop/Funk:</strong> <a href="https://maps.google.com/?q=Zero+Tokyo+Shinjuku" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Zero Tokyo</a> (Shinjuku/Kabukicho Tower) — multiple floors including hip hop nights, newest major Tokyo club. Worth checking lineup · <a href="https://maps.google.com/?q=DJ+Bar+Koara+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">DJ Bar Koara</a> (Shibuya backstreets) — tiny basement bar, Techno/House/Disco/Funk/Soul, cheap entry (¥1,000), excellent DJs, neighbourhood favourite · <strong style="color:var(--gold)">Note:</strong> 8 Jul is a 14:35 flight so avoid a big night on 7 Jul — or keep it to Contact/VENT which wind down by 5am</div></div></div>
+      <div class="night-card" id="night-tokyo1">
+        <div class="night-header" onclick="toggleNight('night-tokyo1')">
+          <div class="night-icon">🎧</div>
+          <div class="night-title">
+            <div class="night-label">Nightlife · 6 or 7 July</div>
+            <div class="night-name">Tokyo Clubs — Shibuya & Aoyama</div>
+          </div>
+          <div class="night-chevron">▾</div>
+        </div>
+        <div class="night-body">
+          <div class="night-section-title">Deep House / Progressive House</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=VENT+Tokyo+Aoyama" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">VENT</a> · Aoyama · RA top pick</div>
+            <div class="night-venue-desc">The definitive deep house club in Tokyo — only real club in Aoyama, extraordinary hi-res sound system, carefully chosen bookings (Special Request, Dubfire, HAAI, D.TIFFANY). Doubles as a gallery by day. Fri/Sat 11pm–5am · 2 min from Omotesando station · ra.co/clubs/122892</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=ENTER+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">ENTER</a> · Shibuya · Successor to Contact (closed 2022)</div>
+            <div class="night-venue-desc">Opened December 2022 by the former Contact team with the same Meyer Sound system. 150-capacity, DJ booth in the centre of the floor for 360° sound. Sits near Miyashita Park, Shibuya. Underground house and techno, emerging Japanese and international artists. Sister to DJ Bar Bridge and Wrep — wristband gets you into all. ra.co for lineup.</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=WOMB+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">WOMB</a> · Shibuya · The big room option</div>
+            <div class="night-venue-desc">Tokyo's longest-running serious club, 1,000-cap, recently renovated. Four floors including hip hop. When WOMB books well (Carl Cox, DJ Nobu, Peggy Gou) it's exceptional. Check the lineup — it varies enormously. ra.co/clubs/54252 (listed as WWW on RA)</div>
+          </div>          <div class="night-section-title">Hip Hop / Funk / Soul</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=DJ+Bar+Koara+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">DJ Bar Koara</a> · Shibuya backstreets</div>
+            <div class="night-venue-desc">Tiny basement bar, ¥1,000 entry, rotating DJs playing Techno/House/Disco/Funk/Soul. Monthly Disco Mania night is legendary. The most unassuming and consistently excellent small venue in Tokyo.</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Aoyama+Hachi+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Aoyama Hachi</a> · Aoyama · voted best Tokyo club</div>
+            <div class="night-venue-desc">30th anniversary in 2025, Time Out Tokyo award. Four floors in a narrow building, each with different music — hip hop, house, rock. View over Roppongi-dori from the 2nd floor. Open till 5am. RA-listed.</div>
+          </div>
+          <div class="night-practical"><strong>Key:</strong> Contact is permanently closed (demolished 2022). Sound Museum Vision also closed. ENTER is their replacement. Always check ra.co/events/jp/tokyo before committing — the DJ is everything. Last train ~midnight from Shibuya, then taxi back to Hotel Niwa. Clubs run till 5am.</div>
+        </div>
+      </div>
 
   <div class="day-card">
     <div class="day-header">
@@ -939,12 +1130,40 @@
     <div class="day-body">
       <div class="item"><div class="item-icon">🔔</div><div class="item-content"><div class="item-label">07:00–08:00 · Do Not Miss</div><div class="item-text">Morning Prayer Ceremony · Fudo-in</div><div class="item-sub">One of the most memorable experiences of the entire trip — incense, chanting, candlelight</div></div></div>
       <div class="item"><div class="item-icon">🌫️</div><div class="item-content"><div class="item-label">After Ceremony</div><div class="item-text">Okunoin in morning mist</div><div class="item-sub">Walk the cemetery again before crowds arrive — completely different atmosphere at dawn</div></div></div>
+      <div class="item"><div class="item-icon">🦌</div><div class="item-content"><div class="item-label">Day Trip Option · En Route to Osaka</div><div class="item-text"><a href="https://maps.google.com/?q=Nara+Japan" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Nara</a> — giant Buddha, sacred deer, no crowds</div><div class="item-sub">Only 45 minutes from Osaka by express train and a superb stop between Koyasan and Osaka. <a href="https://maps.google.com/?q=Todaiji+Temple+Nara" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Todai-ji Temple</a> houses Japan's largest bronze Buddha (15m, cast 752AD) — one of the most impressive structures in Japan. The surrounding <a href="https://maps.google.com/?q=Nara+Park+Japan" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Nara Park</a> has over 1,200 free-roaming deer considered sacred messengers — they bow for deer crackers (shika-senbei, ¥200 from vendors). Also: <a href="https://maps.google.com/?q=Kasuga+Taisha+Shrine+Nara" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Kasuga Taisha shrine</a> (3,000 lanterns) and the charming old city streets of Naramachi. Allow 3–4 hours total. From Koyasan: train to Namba (~90 min), then Kintetsu to Nara (~40 min). Then Nara to Osaka (~45 min). Fits comfortably on a 16 July afternoon before reaching Osaka by evening</div></div></div>
       <div class="item"><div class="item-icon">🏙️</div><div class="item-content"><div class="item-label">Afternoon</div><div class="item-text">Arrive Osaka · Explore Dotonbori</div><div class="item-sub">Glico running man, <a href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Dotonbori</a> canal, takoyaki stands, sensory overload in the best way</div></div></div>
       <div class="item"><div class="item-icon">🍢</div><div class="item-content"><div class="item-label">Evening</div><div class="item-text">Shinsekai · Kushikatsu dinner</div><div class="item-sub">Deep-fried skewers — strict rule: never double-dip the sauce. Shitennoji Temple area nearby</div></div></div>
     </div>
   </div>
 
-      <div class="item"><div class="item-icon">🎧</div><div class="item-content"><div class="item-label">🎧 Nightlife · 16 July — Tonight in Osaka</div><div class="item-text">Osaka Clubbing · <a href="https://maps.google.com/?q=Amerika-mura+Osaka" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Amerika-mura</a> area</div><div class="item-sub"><strong style="color:var(--gold)">Deep/Progressive House:</strong> <a href="https://maps.google.com/?q=Circus+Osaka+Shinsaibashi" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Circus Osaka</a> (Shinsaibashi) — the best underground club in Osaka, strong international bookings, house and techno focused, dark industrial aesthetic. 5 min walk from Amerika-mura · <a href="https://maps.google.com/?q=Joule+Club+Osaka" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Joule</a> — two rooms across basement floors, deep house in one room, tech house in the other, popular with the local DJ community · <strong style="color:var(--gold)">Hip hop/Funk:</strong> <a href="https://maps.google.com/?q=Triangle+Park+Amerika-mura+Osaka" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Triangle Park</a> area — Amerika-mura's central square has small hip hop and funk bars ringing it — B.C.B.G., Club Rocks, Hoop are all within 5 min. More relaxed atmosphere than Tokyo's club scene · <strong style="color:var(--gold)">Practical:</strong> 16 July — no early start next morning (move to Kyoto by midday on 17 Jul) so a late night works. Cover ¥1,500–3,000 · Shinsaibashi subway is the hub · Taxis readily available all night</div></div></div>
+      <div class="night-card" id="night-osaka">
+        <div class="night-header" onclick="toggleNight('night-osaka')">
+          <div class="night-icon">🎧</div>
+          <div class="night-title">
+            <div class="night-label">Nightlife · 16 July — Tonight</div>
+            <div class="night-name">Osaka Clubs — Shinsaibashi & Namba</div>
+          </div>
+          <div class="night-chevron">▾</div>
+        </div>
+        <div class="night-body">
+          <div class="night-section-title">Deep / Minimal Techno</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Daphnia+Club+Osaka" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Daphnia</a> · Osaka · Time Out pick · most serious underground</div>
+            <div class="night-venue-desc">A labour of love from its two owners — exceptional acoustics, intimate, uncompromising programming. Has hosted Moritz von Oswald. Bimonthly events run 30 consecutive hours (Fri night to Sun morning). If you're serious about the music, this is Osaka's best.</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Circus+Osaka+Shinsaibashi" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Circus Osaka</a> · Shinsaibashi · European bookings weekly</div>
+            <div class="night-venue-desc">Small but punchy sound system, consistently books European DJs alongside strong local underground acts. Counterpart to Circus Tokyo. House, techno, experimental. 3 min walk from Yotsubashi Station, 1-8-16 Nishishinsaibashi.</div>
+          </div>          <div class="night-section-title">Multi-Floor / Hip Hop</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Joule+Club+Osaka+Shinsaibashi" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Joule</a> · Shinsaibashi · Funktion One</div>
+            <div class="night-venue-desc">Sizeable rental club where serious promoters host diverse events. Outdoor patio, excellent sound, multiple floors. Check event schedule — it varies hugely night to night but quality events here are excellent.</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Ghost+Ultra+Lounge+Osaka+Namba" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Ghost Ultra Lounge</a> · Namba · Hip Hop specialist</div>
+            <div class="night-venue-desc">Intimate, music-focused hip hop and house club with a sophisticated approach. International guest DJs, mature crowd. Time Out recommended. Cover ¥2,000 including a drink, discounts for international visitors.</div>
+          </div>
+          <div class="night-practical"><strong>How to plan:</strong> Check event schedules in advance — daphnia-osaka.com for Daphnia, circus-osaka.jp for Circus. Cover ¥1,500–3,000. Shinsaibashi subway is the hub for most venues. Taxis plentiful. No early start on 17 July so a late night works perfectly.</div>
+        </div>
+      </div>
 
   <div class="day-card">
     <div class="day-header">
@@ -1105,7 +1324,37 @@
     </div>
   </div>
 
-      <div class="item"><div class="item-icon">🎧</div><div class="item-content"><div class="item-label">🎧 Nightlife · 21 or 22 July</div><div class="item-text">Tokyo II Clubbing · No early starts — this is your chance</div><div class="item-sub"><strong style="color:var(--gold)">Deep/Progressive House:</strong> <a href="https://maps.google.com/?q=Contact+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Contact</a> (Shibuya) — if you went in Tokyo I and loved it, go again. If you didn't, go now. The best underground club in Tokyo, full stop · <a href="https://maps.google.com/?q=Vent+Club+Aoyama+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">VENT</a> (Aoyama) — consistent deep house programming, more intimate than Contact, excellent sound · <a href="https://maps.google.com/?q=WWW+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">WWW B</a> (Shibuya) — Funktion-One basement, more experimental/alternative electronic programming, inside the WWW live music venue · <strong style="color:var(--gold)">Hip Hop/Funk:</strong> <a href="https://maps.google.com/?q=Zero+Tokyo+Shinjuku" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Zero Tokyo</a> (Shinjuku/Kabukicho) — multiple floors, hip hop nights programmed separately from EDM floors, newest major club in Tokyo · <a href="https://maps.google.com/?q=DJ+Bar+Koara+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">DJ Bar Koara</a> (Shibuya backstreets) — Disco/Funk/Soul/House, tiny basement, ¥1,000 entry, monthly Disco Mania event is legendary · <strong style="color:var(--gold)">Practical:</strong> Flight is 20:40 on 23 Jul — leave hotel by 17:00. So 22 Jul is your best big night. Both Shibuya and Shinjuku are 30 min from Asakusa by subway (last train ~1am, then taxi back). Budget ¥3,000–5,000 for entry. Check ra.co for specific lineup before committing to a venue</div></div></div>
+      <div class="night-card" id="night-tokyo2">
+        <div class="night-header" onclick="toggleNight('night-tokyo2')">
+          <div class="night-icon">🎧</div>
+          <div class="night-title">
+            <div class="night-label">Nightlife · 21 or 22 July — Best Night</div>
+            <div class="night-name">Tokyo II Clubs — Aoyama & Shibuya</div>
+          </div>
+          <div class="night-chevron">▾</div>
+        </div>
+        <div class="night-body">
+          <div class="night-section-title">Deep House / Progressive House</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=VENT+Tokyo+Aoyama" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">VENT</a> · Aoyama · RA top pick · go here first</div>
+            <div class="night-venue-desc">If you only go to one club in Tokyo, make it VENT. Extraordinary high-resolution sound — the building materials were chosen to optimise acoustics. Intimate, serious crowd, house and minimal techno. Has hosted Dubfire, DJ Tennis, Acid Pauli, John Talabot. 2 min from Omotesando station. Fri/Sat 11pm–5am. ra.co/clubs/122892</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=ENTER+Club+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">ENTER</a> · Shibuya · Contact's replacement</div>
+            <div class="night-venue-desc">The Contact and Sound Museum Vision era is over (both demolished 2022). ENTER opened in their place with Contact's same Meyer Sound system. 150-capacity, DJ booth centre-floor, underground house and techno, emerging artists. Sister venues give free access on same wristband. Check lineup at ra.co</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=WWWbeta+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">WWWβ</a> · Shibuya · Funktion One basement</div>
+            <div class="night-venue-desc">Funktion One in a small basement inside the WWW live music building on Shibuya's Maruyamacho. More experimental programming — leftfield electronic, post-club, some hip hop nights. If VENT is too straight techno this is the alternative. ra.co/clubs/54252</div>
+          </div>          <div class="night-section-title">Hip Hop / Funk / Soul</div>
+          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=Aoyama+Hachi+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Aoyama Hachi</a> · Aoyama · 30-year institution</div>
+            <div class="night-venue-desc">Four floors in a thin building overlooking Roppongi-dori. Hip hop, house, rock on different floors. 30th anniversary in 2025. Time Out Tokyo voted best club. Open till 5am. Great for a mixed musical night.</div>
+          </div>          <div class="night-venue">
+            <div class="night-venue-name"><a href="https://maps.google.com/?q=DJ+Bar+Koara+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">DJ Bar Koara</a> · Shibuya · tiny, no nonsense</div>
+            <div class="night-venue-desc">Basement bar, ¥1,000 entry, Disco/Funk/Soul/House. Monthly Disco Mania event is legendary. The most honest small club in Tokyo. Check their Instagram for schedule.</div>
+          </div>
+          <div class="night-practical"><strong>Best night: 22 July</strong> — flight is 20:40 on 23 Jul, leave hotel by 17:00. 22 Jul is your night. Subway from Asakusa to Shibuya ~30 min (last train ~1am, then taxi back ¥2,000–3,000). Budget ¥3,000–5,000 entry. ALWAYS check ra.co for specific lineup the week before — the DJ determines everything. Contact and Sound Museum Vision are permanently closed — ignore any recommendation mentioning them.</div>
+        </div>
+      </div>
 
   <div class="day-card">
     <div class="day-header">
@@ -1219,6 +1468,82 @@
 <footer>旅を楽しんでください · Enjoy the journey · July 2026</footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+// AUTO-NAVIGATE TO CURRENT DATE
+function autoNavigateToDate() {
+  var today = new Date();
+  var y = today.getFullYear(), m = today.getMonth()+1, d = today.getDate();
+  var region = 'summary'; // default
+  var dayNum = null;
+
+  // Date ranges → region mapping
+  if (y === 2026) {
+    if (m === 7) {
+      if (d >= 2 && d <= 4)  { region = 'seoul'; dayNum = d; }
+      else if (d === 5 && today.getHours() < 17) { region = 'seoul'; dayNum = 5; }
+      else if (d >= 5)       { region = 'tokyo1'; dayNum = d; }
+      if (d >= 8)            { region = 'hokkaido'; dayNum = d; }
+      if (d >= 11 && d <= 13){ region = 'miyako'; dayNum = d; }
+      if (d === 14)          { region = 'miyako'; dayNum = 14; }
+      if (d >= 14 && d <= 19){ region = 'kansai'; dayNum = d; }
+      if (d >= 19 && d <= 20){ region = 'hiroshima'; dayNum = d; }
+      if (d >= 21 && d <= 23){ region = 'tokyo2'; dayNum = d; }
+    }
+  }
+
+  // Activate the correct tab
+  document.querySelectorAll('.region').forEach(function(r){ r.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+  var targetRegion = document.getElementById(region);
+  if (targetRegion) {
+    targetRegion.classList.add('active');
+    // Activate nav tab
+    document.querySelectorAll('.nav-tab').forEach(function(t){
+      if (t.getAttribute('onclick') && t.getAttribute('onclick').indexOf("'" + region + "'") > -1) {
+        t.classList.add('active');
+      }
+    });
+    // Open today's day card if we can match it
+    if (dayNum) {
+      var cards = targetRegion.querySelectorAll('.day-card');
+      var opened = false;
+      cards.forEach(function(card) {
+        var numEl = card.querySelector('.day-num');
+        if (numEl && !opened) {
+          var numText = numEl.textContent || '';
+          // Check if card contains today's date number
+          var dayStr = String(dayNum);
+          if (numText.indexOf(dayStr) > -1) {
+            card.classList.add('open');
+            opened = true;
+          }
+        }
+      });
+      // If no specific day card found, open first card
+      if (!opened && cards.length > 0) {
+        cards[0].classList.add('open');
+      }
+    }
+  }
+}
+
+// NIGHTLIFE TOGGLE
+function toggleNight(id) {
+  var card = document.getElementById(id);
+  if (card) card.classList.toggle('open');
+}
+
+window.addEventListener('load', function() {
+  // Attach toggles to day cards
+  document.querySelectorAll('.day-card').forEach(function(card) {
+    var header = card.querySelector('.day-header');
+    if (!header) return;
+    header.addEventListener('click', function() { card.classList.toggle('open'); });
+  });
+  // Auto-navigate to current date (overrides default Seoul active tab)
+  autoNavigateToDate();
+});
+
 // CORE NAV & TOGGLE — isolated, no dependencies
 function showRegion(e, id) {
   try {
@@ -1230,19 +1555,7 @@ function showRegion(e, id) {
   } catch(err) { console.log('showRegion error:', err); }
 }
 
-window.addEventListener('load', function() {
-  // Attach toggles to day cards
-  document.querySelectorAll('.day-card').forEach(function(card) {
-    var header = card.querySelector('.day-header');
-    if (!header) return;
-    header.addEventListener('click', function() {
-      card.classList.toggle('open');
-    });
-  });
-  // Open first card
-  var first = document.querySelector('.region.active .day-card');
-  if (first) first.classList.add('open');
-});
+// Load handled by autoNavigateToDate() above
 </script>
 
 <script>
