@@ -524,7 +524,144 @@
   .night-venue-name { font-size:17px; font-weight:500; color:var(--white); }
   .night-venue-desc { font-size:15px; color:var(--mist); line-height:1.6; margin-top:3px; }
   .night-practical { font-size:15px; color:var(--stone); border-top:1px solid var(--border); padding-top:10px; margin-top:12px; }
-</style>
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE RESPONSIVE · phones < 480px
+     ═══════════════════════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+    /* Nav tabs - larger touch targets */
+    .nav-tab {
+      font-size: 11px !important;
+      padding: 12px 14px !important;
+      min-width: auto;
+    }
+    .nav-scroll {
+      padding: 0 8px;
+      gap: 0;
+    }
+
+    /* Region headers */
+    .region-header { padding: 20px 16px 16px; }
+    .region-kanji { font-size: 42px; }
+    .region-info h2 { font-size: 20px; }
+    .region-info .region-dates { font-size: 15px; }
+
+    /* Day cards - larger text and tap targets */
+    .day-header { padding: 14px 12px; min-height: 52px; }
+    .day-num { font-size: 12px; min-width: 90px; }
+    .day-title { font-size: 16px; }
+    .day-chevron { font-size: 20px; padding: 0 4px; }
+
+    /* Item content - the main readable text */
+    .item { padding: 4px 0; }
+    .item-icon { font-size: 22px; min-width: 32px; }
+    .item-label { font-size: 12px; letter-spacing: 0.06em; }
+    .item-text { font-size: 17px !important; line-height: 1.5; }
+    .item-sub { font-size: 16px !important; line-height: 1.7 !important; }
+
+    /* Nightlife cards */
+    .night-header { padding: 14px 12px; }
+    .night-label { font-size: 12px; }
+    .night-name { font-size: 17px; }
+    .night-venue-name { font-size: 17px !important; }
+    .night-venue-desc { font-size: 16px !important; line-height: 1.7 !important; }
+    .night-section-title { font-size: 12px; }
+    .night-practical { font-size: 16px !important; }
+
+    /* History cards */
+    .hist-card-header { padding: 14px 12px; }
+    .hist-card-date { font-size: 12px; }
+    .hist-card-title { font-size: 18px !important; }
+    .hist-card-summary { font-size: 15px !important; line-height: 1.6; }
+    .hist-body { font-size: 17px !important; line-height: 1.85 !important; }
+    .hist-intro { font-size: 17px !important; line-height: 1.85; padding: 12px 12px 8px; }
+
+    /* Food section */
+    .food-chapter { padding: 12px 12px 0; }
+    .food-body { font-size: 17px !important; line-height: 1.8 !important; }
+    .food-dish-name { font-size: 17px; }
+    .food-dish-jp { font-size: 12px; }
+    .food-dish-desc { font-size: 16px !important; line-height: 1.75 !important; }
+    .food-card { padding: 12px; margin: 0 8px 12px; }
+    .food-card-title { font-size: 17px; }
+    .food-card-body { font-size: 16px !important; line-height: 1.75 !important; }
+    .food-collapse-header { padding: 14px 12px; }
+    .food-collapse-title { font-size: 17px; }
+    .food-chapter-title { font-size: 12px; }
+
+    /* Allergy cards */
+    .allergy-card { padding: 12px; margin: 0 8px 12px; }
+    .allergy-jp { font-size: 18px !important; }
+    .allergy-romaji { font-size: 14px; }
+    .allergy-en { font-size: 14px; }
+
+    /* Booking/Reminder items */
+    .booking-item { padding: 12px 0; }
+    .booking-name { font-size: 16px !important; }
+    .booking-meta { font-size: 14px !important; line-height: 1.6; }
+
+    /* Tips */
+    .tip-card { padding: 12px; margin: 0 8px 8px; }
+    .tip-category { font-size: 14px; }
+    .tip-text { font-size: 16px !important; line-height: 1.7; }
+
+    /* Summary/Overview grid */
+    .summary-grid { padding: 8px; }
+    .summary-row { padding: 8px 4px; }
+    .s-date { font-size: 12px; min-width: 55px; }
+    .s-loc { font-size: 14px; }
+    .s-detail { font-size: 13px; }
+
+    /* SVG map - fit to screen */
+    .summary-map svg { min-width: 100% !important; }
+
+    /* Links - larger tap targets */
+    a { padding: 2px 0; }
+
+    /* Main container */
+    main { padding: 0 0 60px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TABLET RESPONSIVE · 481-768px
+     ═══════════════════════════════════════════════════════════════ */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .item-text { font-size: 17px; }
+    .item-sub { font-size: 16px; line-height: 1.7; }
+    .day-title { font-size: 17px; }
+    .night-venue-name { font-size: 17px; }
+    .night-venue-desc { font-size: 16px; line-height: 1.7; }
+    .hist-body { font-size: 17px; }
+    .food-body { font-size: 17px; }
+    .food-dish-desc { font-size: 16px; }
+    .summary-map svg { min-width: 100% !important; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PWA INSTALL HINT · shown on first visit
+     ═══════════════════════════════════════════════════════════════ */
+  .pwa-hint {
+    display: none;
+    background: rgba(106,184,200,0.12);
+    border: 1px solid rgba(106,184,200,0.3);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 8px 16px;
+    font-size: 14px;
+    color: var(--mist);
+    line-height: 1.5;
+  }
+  .pwa-hint strong { color: var(--white); }
+  .pwa-hint-close {
+    float: right;
+    color: var(--stone);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 4px;
+  }
+
+  </style>
 
   <div class="summary-grid">
     <div class="summary-row">
@@ -2155,6 +2292,15 @@ function toggleNight(id) {
 }
 
 window.addEventListener('load', function() {
+
+// Show PWA install hint on mobile (if not dismissed and not already installed)
+if (window.innerWidth < 768 && !window.matchMedia('(display-mode: standalone)').matches) {
+  if (!localStorage.getItem('pwa-dismissed')) {
+    var hint = document.getElementById('pwa-hint');
+    if (hint) hint.style.display = 'block';
+  }
+}
+
   // Attach toggles to day cards
   document.querySelectorAll('.day-card').forEach(function(card) {
     var header = card.querySelector('.day-header');
