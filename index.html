@@ -470,6 +470,8 @@
 <main>
 
 <!-- SEOUL -->
+<div class="reminder-banner" id="reminder-banner"></div>
+
 <section class="region" id="summary">
   <div class="region-header">
     <div class="region-kanji">概要</div>
@@ -529,6 +531,26 @@
   /* ═══════════════════════════════════════════════════════════════
      MOBILE RESPONSIVE · phones < 480px
      ═══════════════════════════════════════════════════════════════ */
+  /* Date-triggered reminder banner */
+  .reminder-banner {
+    display: none;
+    background: rgba(106,184,200,0.12);
+    border: 1px solid rgba(106,184,200,0.3);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 8px 16px 4px;
+    font-size: 15px;
+    color: var(--mist);
+    line-height: 1.5;
+  }
+  .reminder-banner strong { color: var(--white); }
+  .reminder-banner .rb-date { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; }
+  .reminder-banner .rb-item { padding:6px 0; border-bottom:1px solid rgba(106,184,200,0.1); }
+  .reminder-banner .rb-item:last-child { border-bottom:none; }
+  @media (max-width: 480px) {
+    .reminder-banner { font-size: 16px; margin: 6px 8px 4px; }
+  }
+
   @media (max-width: 480px) {
     /* Nav tabs - larger touch targets */
     .nav-tab {
@@ -667,7 +689,7 @@
     <div class="summary-row">
       <div class="s-date">1 Jul</div>
       <div class="s-loc">Cape Town → Addis</div>
-      <div class="s-detail"><span class="s-tag s-flight">✈️ ET844</span> Departs 23:50</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET844</span> Departs 13:50</div>
     </div>
     <div class="summary-row">
       <div class="s-date">2 Jul</div>
@@ -758,12 +780,12 @@
     <div class="summary-row">
       <div class="s-date">23 Jul</div>
       <div class="s-loc">→ Addis</div>
-      <div class="s-detail"><span class="s-tag s-flight">✈️ ET673</span> 20:40 · Leave OMO3 by 17:00</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET673</span> 20:40 (via Seoul 23:05–00:20) · Leave OMO3 by 17:00</div>
     </div>
     <div class="summary-row">
       <div class="s-date">24 Jul</div>
       <div class="s-loc">→ Cape Town</div>
-      <div class="s-detail"><span class="s-tag s-flight">✈️ ET847</span> Addis 08:40 · Arrives CPT 14:35</div>
+      <div class="s-detail"><span class="s-tag s-flight">✈️ ET847</span> Addis 09:05 · Arrives CPT 14:35</div>
     </div>
   </div>
 
@@ -903,11 +925,11 @@
   <div class="day-card">
     <div class="day-header">
       <div class="day-num">TUE 1 JUL</div>
-      <div class="day-title">Departure — Cape Town · 23h50</div>
+      <div class="day-title">Departure — Cape Town · 13h50</div>
       <div class="day-chevron">▾</div>
     </div>
     <div class="day-body">
-      <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight</div><div class="item-text">ET844 · Cape Town → Addis Ababa</div><div class="item-sub">Departs 23h50 · Arrives 21h15 (1 Jul)</div></div></div>
+      <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight</div><div class="item-text">ET844 · Cape Town → Addis Ababa</div><div class="item-sub">Departs 13h50 · Arrives 21h15 (1 Jul)</div></div></div>
       <div class="item"><div class="item-icon">✈️</div><div class="item-content"><div class="item-label">Flight · Leg 2</div><div class="item-text">ET672 · Addis Ababa → Seoul</div><div class="item-sub">Departs 22h35 · Arrives 16h00 2 Jul</div></div></div>
       <div class="item"><div class="item-icon">💡</div><div class="item-content"><div class="item-label">Note</div><div class="item-text">Arrive 2 July — rest day, settle in, first Korean meal</div></div></div>
     </div>
@@ -988,6 +1010,9 @@
         </div>
       </div>
 
+      <div class="item"><div class="item-icon">💅</div><div class="item-content"><div class="item-label">4 July · 12:00 · Maya’s Beauty Appointment</div><div class="item-text">Maya: Beauty treatment · 2–3 hours</div><div class="item-sub">Maya has a beauty appointment at 12:00 on 4 July (2–3 hours). Tunin solo time — some options:<br><br><strong><a href="https://maps.google.com/?q=War+Memorial+of+Korea+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">War Memorial of Korea</a></strong> — one of the best military museums in Asia, covering the Korean War and colonial period. Free entry, 2–3 hours, air-conditioned. 15 min by subway from Myeongdong. Directly relevant to the history in this app.<br><strong>Euljiro</strong> — 10 min walk from hotel. Seoul’s coolest neighbourhood: industrial buildings hiding speakeasy bars, coffee shops and galleries behind unmarked doors.<br><strong><a href="https://maps.google.com/?q=N+Seoul+Tower+Namsan" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Namsan Tower</a></strong> — hike up Namsan Mountain (30 min walk from Myeongdong) for panoramic city views. 2 hours round trip.<br><strong>Solo lunch</strong> — perfect window for <a href="https://maps.google.com/?q=Tosokchon+Samgyetang+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Tosokchon samgyetang</a> or <a href="https://maps.google.com/?q=Majang+Meat+Market+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Majang Market hanwoo BBQ</a> at your own pace.</div></div></div>
+      <div class="item"><div class="item-icon">💻</div><div class="item-content"><div class="item-label">Shopping · Seoul</div><div class="item-text">Buy 16" laptop case for Lenovo ThinkPad E16</div><div class="item-sub">Cheaper in Seoul than SA. Options:<br><strong>Myeongdong accessory shops</strong> (next to hotel) — padded laptop sleeves ₩15,000–30,000 (~R200–400)<br><strong><a href="https://maps.google.com/?q=Yongsan+Electronics+Market+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Yongsan Electronics Market</a></strong> — wider selection, lower prices<br><strong>Daiso Korea</strong> — basic padded sleeve ₩3,000–5,000 (~R40–65)<br>Buy on day 1 or 2 to protect the laptop for the rest of the trip.</div></div></div>
+      <div class="item"><div class="item-icon">🚕</div><div class="item-content"><div class="item-label">Transport · Taxi App</div><div class="item-text">K.Ride — download before departure</div><div class="item-sub">K.Ride is the best taxi app for foreign visitors in Seoul — login via Google account, register international credit card, no Korean phone number needed. Uses Kakao’s massive driver network so pickups are fast. Real-time chat translation with drivers. Base fare ₩4,800 · Late night surcharge 20–40% between 22:00–04:00. Have Uber as backup (switches to UT mode automatically in Korea).<br><br><strong>Tip:</strong> Screenshot your destination in Korean and show to the driver — avoids miscommunication even with the app.</div></div></div>
       <div class="item"><div class="item-icon">⚽</div><div class="item-content"><div class="item-label">World Cup 2026 · Watch Live</div><div class="item-text">Round of 32 · July 1–5</div><div class="item-sub">The Round of 32 runs during your Seoul stay. If Japan, South Africa or Scotland qualified from the groups, their first knockout matches fall here. Korea in Group A with Mexico, South Korea, Czechia — if Korea advances, Seoul will be electric.<br><br><strong>Kick-off times (local):</strong> US afternoon games (3pm ET) = 4am KST. Evening games (8-9pm ET) = 9–10am KST — perfect for morning viewing.<br><br><strong>Where to watch:</strong> Any bar in Itaewon or Hongdae will have screens. If Korea is still in, expect giant public viewing screens in <a href="https://maps.google.com/?q=Gwanghwamun+Square+Seoul" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Gwanghwamun Square</a> with tens of thousands of red-shirted fans — one of the great World Cup atmospheres on earth. Your hotel may also screen games in the lobby.</div></div></div>
   <div class="day-card">
     <div class="day-header">
@@ -1109,6 +1134,7 @@
         </div>
       </div>
 
+      <div class="item"><div class="item-icon">🚕</div><div class="item-content"><div class="item-label">Transport · Taxi App</div><div class="item-text">GO App — download before departure</div><div class="item-sub">GO (formerly JapanTaxi) is Japan’s dominant taxi app — more drivers and faster pickup than Uber. Download and register before departure. English interface available. Base fare ¥500. Use subway for longer journeys (much cheaper).<br><br>That said, Tokyo taxis are easy to hail on the street — a red light on the roof means available. The rear door opens and closes <strong>automatically</strong> — don’t touch it (common tourist mistake). Taxis accept credit cards and IC cards (Suica).</div></div></div>
       <div class="item"><div class="item-icon">⚽</div><div class="item-content"><div class="item-label">World Cup 2026 · Watch Live</div><div class="item-text">Round of 16 · July 5–8</div><div class="item-sub">Round of 16 matches during your Tokyo I stay. If Japan advanced from Group F (Netherlands, Sweden), their R16 match likely falls here.<br><br><strong>Kick-off times (local):</strong> US afternoon games (3pm ET) = 4am JST. Evening games (8-9pm ET) = 9–10am JST.<br><br><strong>Where to watch:</strong> <a href="https://maps.google.com/?q=HUB+British+Pub+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">HUB British Pub</a> — locations in Shibuya, Shinjuku, Akihabara (near Hotel Niwa). Big screens, beer, open for early morning games during World Cup. Also sports bars in Roppongi. If Japan is playing, the atmosphere at any HUB will be extraordinary.</div></div></div>
   <div class="day-card">
     <div class="day-header">
@@ -1588,6 +1614,7 @@
       <div class="item"><div class="item-icon">🏛️</div><div class="item-content"><div class="item-label">Museum · Combine with Sumo District</div><div class="item-text"><a href="https://maps.google.com/?q=Sumida+Hokusai+Museum+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Sumida Hokusai Museum</a> · The Great Wave</div><div class="item-sub">Dedicated to Katsushika Hokusai, the Edo-period artist who created The Great Wave off Kanagawa — arguably the most recognisable Japanese artwork in the world. He produced it aged 71 as one of a series of 36 views of Mount Fuji, sold for the price of a bowl of noodles. ¥400 entry. In Ryogoku, right next to the Sumo Museum and chanko nabe restaurants — combine all three for a perfect Ryogoku half-day.</div></div></div>
       <div class="item"><div class="item-icon">🎤</div><div class="item-content"><div class="item-label">Experience · Do It Once</div><div class="item-text">Karaoke · Daytime is cheapest</div><div class="item-sub">One of the quintessential Japan experiences — and genuinely fun. You get a private room (not a stage in front of strangers), a touchscreen song catalogue with English songs, microphones, tambourines, and unlimited drinks from a machine. Daytime rates are significantly cheaper than evening — ¥500–1,000 per person per hour vs ¥2,000+ at night. Big chains: Big Echo, Karaoke Kan, Joysound. There’s one near every station in Tokyo. Go for an hour between sightseeing — Maya will love it.</div></div></div>
       <div class="item"><div class="item-icon">🛒</div><div class="item-content"><div class="item-label">Shopping · Souvenirs</div><div class="item-text"><a href="https://maps.google.com/?q=Don+Quijote+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Don Quijote (Donki)</a> · Open 24 hours</div><div class="item-sub">A chaotic multi-floor discount store selling everything from Japanese snacks, cosmetics, electronics, novelty goods, souvenirs, clothing and household items at below-retail prices. The Asakusa branch is a 5-min walk from OMO3. Tax-free for tourists (bring passport). The Donki theme song will be stuck in your head for days. Go at midnight when it’s quiet.</div></div></div>
+      <div class="item"><div class="item-icon">🧳</div><div class="item-content"><div class="item-label">Shopping · Luggage for Souvenirs</div><div class="item-text">Buy a cheap suitcase for the journey home</div><div class="item-sub">You’re travelling with backpacks only — but you have 2 checked bags each on Ethiopian Airlines (4 bags total, only 2 used). Buy a cheap suitcase to fill with shopping and check as your spare bag:<br><br><strong><a href="https://maps.google.com/?q=Don+Quijote+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Don Quijote</a></strong> — new suitcases from ¥3,000–5,000 (R400–650) · Asakusa branch 5 min from OMO3<br><strong><a href="https://maps.google.com/?q=Hard+Off+Akihabara+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hard Off / 2nd Street</a></strong> — second-hand suitcases from ¥1,000–2,000 (R130–260) in good condition<br><strong>Uniqlo</strong> — large packable duffle bag ~¥1,500, folds to nothing, lighter option if mostly buying clothes<br><br>Buy on day 1 of Tokyo II (21 July) and shop freely for the remaining days.</div></div></div>
       <div class="item"><div class="item-icon">🚶</div><div class="item-content"><div class="item-label">Walk</div><div class="item-text"><a href="https://maps.google.com/?q=Sumida+River+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Sumida River</a> walk &amp; <a href="https://maps.google.com/?q=Hoppy+Street+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hoppy Street</a></div><div class="item-sub">The riverside walk from Asakusa heading north gives views of the Tokyo Skytree from below — it's even more striking up close than from a distance. The twin observation decks (350m and 450m) are bookable online for extraordinary night views if you want to splurge · <a href="https://maps.google.com/?q=Hoppy+Street+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hoppy Street</a> (Nishi-Sando): an old-fashioned outdoor drinking street with long communal tables, paper lanterns, grilled chicken yakitori and cheap beer/hoppy (beer-like malt drink). Unchanged since the 1950s, entirely local crowd, one of Tokyo's most authentic evening experiences</div></div></div>
       <div class="item"><div class="item-icon">🧳</div><div class="item-content"><div class="item-label">Luggage Forwarding · Pending</div><div class="item-text">Bags forwarded from Haneda · 11 July</div><div class="item-sub">Request sent to OMO3 to hold bags arriving 12 July for check-in on 21 July · Await confirmation · Use Yamato counter at Haneda on 11 July during connection <span class="tag tag-todo">Awaiting Confirmation</span></div></div>
     </div>
@@ -1641,21 +1668,30 @@
     </div>
   </div>
       <div class="item"><div class="item-icon">⚽</div><div class="item-content"><div class="item-label">World Cup 2026 · Watch Live</div><div class="item-text">Post-Tournament</div><div class="item-sub">The World Cup finishes July 19 — by the time you reach Tokyo II, the tournament is over. Time to discuss the results over chanko nabe in Ryogoku and a whisky in Golden Gai.<br><br><strong>Kick-off times (local):</strong> N/A — tournament complete.<br><br><strong>Where to watch:</strong> Catch replays and analysis at any <a href="https://maps.google.com/?q=HUB+British+Pub+Shibuya+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">HUB</a> in Shibuya or Shinjuku.</div></div></div>
-  <div class="day-card">
+    <div class="day-card">
     <div class="day-header">
       <div class="day-num">📜</div>
-      <div class="day-title">Tokyo II -- Asakusa, Senso-ji and the Post-War Miracle</div>
+      <div class="day-title">Tokyo II · Asakusa, Senso-ji &amp; the Post-War Miracle</div>
       <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="item"><div class="item-icon">⛩️</div><div class="item-content"><div class="item-label">Founded 645 AD</div><div class="item-text"><a href="https://maps.google.com/?q=Senso-ji+Temple+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Senso-ji Temple</a> · Tokyo’s oldest temple</div><div class="item-sub">Founded in 645 AD — over 1,300 years ago — making it Tokyo’s oldest temple, predating the city by a thousand years. According to tradition, two fishermen brothers pulled a golden image of Kannon (the Buddhist goddess of mercy) from the Sumida River. The image has been enshrined here ever since, surviving the Warring States period, the 1923 Great Kanto Earthquake and the 1945 American firebombing raids. The current temple was rebuilt in 1958. Arrive before 7am to find the sanctuary nearly empty — the golden interior, incense smoke, monks’ morning rituals — in a silence that makes the tourist crowds of later in the day inconceivable.</div></div></div>
+      <div class="item"><div class="item-icon">🏪</div><div class="item-content"><div class="item-label">Edo Period</div><div class="item-text"><a href="https://maps.google.com/?q=Nakamise+Shopping+Street+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Nakamise Shopping Street</a> · One of the world’s oldest commercial streets</div><div class="item-sub">Asakusa was the entertainment district of Edo — kabuki theatres and teahouses for the merchant class. Nakamise dates from the Edo period, when shopkeepers were granted the right to sell goods to pilgrims visiting the shrine — one of the world’s oldest continuously operating commercial streets.</div></div></div>
+      <div class="item"><div class="item-icon">🏭</div><div class="item-content"><div class="item-label">Post-War Miracle</div><div class="item-text">Japan’s Economic Transformation · 1945–1980</div><div class="item-sub">The post-war economic miracle transformed Tokyo from a city of ashes in 1945 into the world’s largest metropolitan economy by 1980. Japan’s GDP grew at 10% annually for 20 years — unprecedented in human history. The country rebuilt under its pacifist constitution, renounced war as state policy, and channelled energy into manufacturing and technology. Toyota, Sony, Honda and Panasonic are all products of this 40-year transformation. The 1964 Tokyo Olympics marked Japan’s symbolic return to the world stage: on the day the Games opened, the Tokaido Shinkansen began operating — the world’s first high-speed railway.</div></div></div>
+      <div class="item"><div class="item-icon">🥋</div><div class="item-content"><div class="item-label">Sumo</div><div class="item-text"><a href="https://maps.google.com/?q=Ryogoku+Kokugikan+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Ryogoku Kokugikan</a> · Shinto Ritual and Sport</div><div class="item-sub">The Ryogoku Kokugikan sits in the sumo district where wrestlers’ stables have been concentrated since the Edo period. Sumo’s origins are in Shinto ritual — originally performed at shrines as communication with the gods, the earth of the dohyo ring considered sacred. The pre-bout rituals (foot-stamping, salt-throwing, prolonged staring) are Shinto ceremony as much as sport.</div></div></div>
     </div>
   </div>
 
   <div class="day-card">
     <div class="day-header">
       <div class="day-num">🍜</div>
-      <div class="day-title">Tokyo II -- What to Eat</div>
+      <div class="day-title">Tokyo II · What to Eat</div>
       <div class="day-chevron">▾</div>
- 
-  </div>   </div>
+    </div>
+    <div class="day-body">
+      <div class="item"><div class="item-icon">🥢</div><div class="item-content"><div class="item-label">Local Food &amp; Specialities</div><div class="item-text">Tokyo II · Asakusa, Ryogoku &amp; Final Days</div><div class="item-sub"><strong>Senso-ji before 07:00 and <a href="https://maps.google.com/?q=Hoppy+Street+Asakusa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hoppy Street</a> evenings</strong><br>Arrive at Senso-ji before the crowds. For evenings, Hoppy Street is a row of old-school izakayas with outdoor seating, yakitori, edamame and cold Hoppy (low-alcohol beer substitute mixed with shochu, invented in 1948 when beer was too expensive). The most unchanged street in Tokyo. ¥2,000–3,000 for an evening.<br><br><strong>Den · 21 July 19:00 · CONFIRMED</strong><br>Chef Zaiyu Hasegawa’s creative Japanese omakase. Menu changes daily. Famous for warmth and the Den Burger parting gift. Leave OMO3 by 18:15. Ginza Line Asakusa to Omotesando (30 min), 10 min walk. Smart casual. 100% same-day cancellation charge.<br><br><strong>Chanko Nabe in <a href="https://maps.google.com/?q=Ryogoku+Kokugikan+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Ryogoku</a></strong><br>The sumo wrestler’s hot pot — chicken or fish broth, tofu, vegetables, mochi, noodles added progressively. Several wrestler-owned restaurants serve it. ¥3,000–5,000 for two. Then visit the <a href="https://maps.google.com/?q=Sumo+Museum+Ryogoku+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Sumo Museum</a> (free, weekdays) and the <a href="https://maps.google.com/?q=Sumida+Hokusai+Museum+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Sumida Hokusai Museum</a> (¥400).<br><br><strong>Asakusa neighbourhood</strong><br>Ningyo-yaki (small red-bean cakes shaped like dolls, baked fresh near Senso-ji). Melonpan from street bakeries on Nakamise. Tempura lunch at any long-established local restaurant.<br><br><strong>⚠️ Allergy note:</strong> Chanko nabe and izakaya food are safe. Check dessert toppings. Tell Den staff about your allergy on arrival.</div></div></div>
+    </div>
+  </div>
 
 </section>
 
@@ -2148,12 +2184,12 @@
     </div>
   </div>
   <div class="booking-list">
-    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🚅 Shinkansen · Kyoto → Hiroshima</div><div class="booking-meta">19 July · 15:00–15:30 · Requested via shinkansen-ticket.com · Awaiting confirmation via email · Left side seats A/B · Car 7 rows 3–10 · Buy ekiben at Kyoto Station</div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🚅 Shinkansen · Kyoto → Hiroshima · CONFIRMED</div><div class="booking-meta">19 July · 15:00–15:30 · CONFIRMED · Order #83495 · NOZOMI 71 · Kyoto 15:02 → Hiroshima 16:42 · Car 7 Seats 3-A &amp; 3-B (left side, Seto Inland Sea views) · QR tickets via PDF — scan at automatic gate, no paper ticket needed · Left side seats A/B · Car 7 rows 3–10 · Buy ekiben at Kyoto Station</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🧳 Luggage Forwarding · Haneda → OMO3</div><div class="booking-meta">11 July · Request sent to OMO3 · Awaiting confirmation · Drop bags at Yamato counter Haneda Terminal 3 before SKY613 · Bags waiting 21 July</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-red"></div><div><div class="booking-name">🪦 International Driving Permit (IDP)</div><div class="booking-meta">Obtain at AA South Africa before departure · Required for Hokkaido (Klook, 8–11 Jul) and Miyakojima (Klook, 11–14 Jul) · Cannot hire car without IDP</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🏯 Changdeokgung Secret Garden · Seoul</div><div class="booking-meta">Book online at cdg.go.kr · Limited to 50 visitors per English tour (10:30, 14:30) · Sells out days ahead in July · ¥8,000 entry · Book 1–2 weeks before arrival</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🌿 Kokedera (Moss Temple) · Kyoto (Optional)</div><div class="booking-meta">Requires advance reservation weeks to months ahead · Apply online at saihoji.com or by postcard · Limited daily visitors · ¥4,000pp · If you want to go, book NOW · Worth reorganising a half-day around</div></div></div>
-    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🌊 teamLab Borderless · Tokyo</div><div class="booking-meta">Azabudai Hills (opened 2024) · Book directly at teamlab.art when July slots open · Do NOT use third-party resellers (risk of QR code issues) · Official price ~¥3,800 (~R500pp) · 7:30pm slot recommended — evening light installations are more immersive and crowds thin toward closing · Best dates: 6 or 7 July (Tokyo I) or 22 July (Tokyo II) · Allow 2–3 hours</div></div></div>
+    <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🌊 teamLab Borderless · CONFIRMED</div><div class="booking-meta">Azabudai Hills (opened 2024) · CONFIRMED · 6 July 18:30–19:00 entry · 2 adults · ¥8,000 total · Ticket AXTFFFMP3WLH-0001 · QR codes via Gmail 24 hours before (check 5 July) · Azabudai Hills · From Hotel Niwa: ~20 min by subway to Kamiyacho Station · Leave by 18:00 · Allow 2–3 hours inside · No re-entry</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🥋 Sumo Stable Visit · Tokyo I (6 or 7 July)</div><div class="booking-meta">Ask Hotel Niwa concierge on arrival 5 July · Or book in advance via sumoconcierge.com or magicaltrip.com · Morning practice 06:00–10:00 in Ryogoku · ¥5,000–8,000pp</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">📱 eSIM · MobiMatter 35GB Japan+Korea</div><div class="booking-meta">Buy 2x eSIM at mobimatter.com before departure · ~$25.49 each ($51 total) · 35GB covers Japan, Korea and China · Use WhatsApp for voice calls between you and Maya · No physical SIM swap needed</div></div></div>
     <div class="booking-item"><div class="booking-dot dot-yellow"></div><div><div class="booking-name">🔌 C5 Power Cable · For Dell Laptop</div><div class="booking-meta">Your Dell 65W adapter is universal voltage (100–240V) · Just need a C5 (cloverleaf) to Type A flat 2-pin cable for Japanese/Korean sockets · Buy before departure or pick one up at any electronics shop in Seoul/Tokyo for under ¥500 · Check Maya’s phone charger situation too — if she has a SA-plug USB-C charger, she’ll need either an adapter or a cheap local charger</div></div></div>
@@ -2218,6 +2254,15 @@
       <div class="tip-category">Saving to Home Screen</div>
       <div class="tip-text">iPhone: tap Share → "Add to Home Screen". Android: tap menu (⋮) → "Add to Home Screen". The app works offline once loaded.</div>
     </div>
+    <div class="tip-card">
+      <div class="tip-category">🏺 Ceramics · Shopping &amp; Shipping Home</div>
+      <div class="tip-text"><strong>Carry small pieces in luggage</strong> under your R5,000pp duty-free allowance (R10,000 combined). Wrap in clothes with bubble wrap from a 100-yen shop. <strong>For expensive/fragile pieces</strong> — have the shop ship them. Japanese ceramics shops pack professionally with insurance. Shipping ¥3,000–8,000 per parcel. <strong>SA customs on shipped goods:</strong> ~20% duty + 15% VAT above R500 de minimis. Example: ¥30,000 ceramics (~R3,900) = ~R1,680 extra in duty/VAT/fees. Gift exemption (R1,400, must be unsolicited) does not apply to self-purchased items. Best strategy: carry affordable pieces, ship expensive ones professionally.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-category">💳 Payment &amp; Transit Setup</div>
+      <div class="tip-text"><strong>Before departure:</strong> K.Ride app (Seoul taxis) · GO app (Tokyo taxis) · 2x MobiMatter eSIM (35GB, ~$25.49 each) · Google Maps offline (Tokyo, Kansai, Hokkaido) · Google Translate offline (Japanese + Korean). <strong>Seoul:</strong> T-money card at Incheon Airport (₩2,500, load ₩20,000–30,000) · Credit cards accepted almost everywhere · ₩100,000 cash for markets. <strong>Japan:</strong> Mobile Suica via Google Wallet (Transport pass → Suica) or Apple Wallet at Narita · Load ¥5,000–10,000 · ¥30,000–50,000 cash at airport (many restaurants cash-only) · Top up at 7-Eleven ATMs (accept international cards). <strong>Apps:</strong> K.Ride · GO · Google Maps · Google Translate · WhatsApp.</div>
+    </div>
+
   </div>
 </section>
 
@@ -2323,6 +2368,52 @@ function showRegion(e, id) {
 }
 
 // Load handled by autoNavigateToDate() above
+
+// Date-triggered reminder banners
+function showReminders() {
+  var banner = document.getElementById('reminder-banner');
+  if (!banner) return;
+  var now = new Date();
+  var today = now.toISOString().slice(0,10);
+  var tm = new Date(now.getTime()+86400000).toISOString().slice(0,10);
+  var d3 = new Date(now.getTime()+172800000).toISOString().slice(0,10);
+  var R = [
+    {d:'2026-06-25',t:'\U0001f4f1 Buy 2x MobiMatter eSIM at mobimatter.com (~$25.49 each)'},
+    {d:'2026-06-25',t:'\U0001f50c Pack C5 cloverleaf cable for Dell laptop'},
+    {d:'2026-06-25',t:'\U0001f4f2 Download K.Ride, GO app, Google Maps offline, Google Translate offline'},
+    {d:'2026-06-28',t:'\U0001faa6 Collect IDP from AA before departure'},
+    {d:'2026-07-01',t:'\u2708\ufe0f ET844 departs CPT 13:50 \u2014 arrive airport by 11:00'},
+    {d:'2026-07-02',t:'\U0001f4b3 Buy T-money card at Incheon Airport + withdraw \u20a9100,000 cash'},
+    {d:'2026-07-04',t:'\U0001f485 Maya: beauty appointment 12:00 (2\u20133 hours)'},
+    {d:'2026-07-05',t:'\U0001f30a Check Gmail for teamLab QR codes (entry tomorrow 18:30)'},
+    {d:'2026-07-05',t:'\U0001f4f1 Set up Suica: Google Wallet \u2192 Transport pass \u2192 Suica \u2192 load \xa55,000'},
+    {d:'2026-07-05',t:'\U0001f4b4 Withdraw \xa530,000\u201350,000 cash at Narita ATM'},
+    {d:'2026-07-06',t:'\U0001f30a teamLab Borderless tonight 18:30 \u2014 leave Hotel Niwa by 18:00'},
+    {d:'2026-07-07',t:'\U0001f969 Namaiki dinner 20:15 \u2014 mention nut allergy on arrival'},
+    {d:'2026-07-08',t:'\U0001f697 Collect car at New Chitose (Klook) \u2014 IDP required'},
+    {d:'2026-07-11',t:'\U0001f9f3 Drop bags at Yamato counter Haneda T3 for OMO3 forwarding'},
+    {d:'2026-07-11',t:'\U0001f697 Collect car at Miyako Airport (Klook) \u2014 IDP required'},
+    {d:'2026-07-14',t:'\U0001f682 Haruka Express from KIX Platform 5 \u2192 Tennoji \u2192 Wakayama'},
+    {d:'2026-07-15',t:'\U0001f6d5 Fudo-in check-in STRICTLY 15:00\u201317:00'},
+    {d:'2026-07-17',t:'\U0001f37d\ufe0f Kikunoi Honten 19:00 \u2014 taxi from Miru Gion \u2014 smart casual \u2014 nut allergy'},
+    {d:'2026-07-19',t:'\U0001f685 NOZOMI 71 Kyoto 15:02 \u2192 Hiroshima 16:42 \u2014 Car 7 Seats 3A/3B \u2014 QR ticket'},
+    {d:'2026-07-21',t:'\U0001f68c Bus departs 18:05 SOGO Hiroshima 3F \u2014 NOT Hiroshima Station'},
+    {d:'2026-07-21',t:'\U0001f37d\ufe0f Den dinner 19:00 \u2014 leave OMO3 by 18:15 \u2014 smart casual'},
+    {d:'2026-07-23',t:'\u2708\ufe0f ET673 departs Narita 20:40 \u2014 leave OMO3 by 17:00'}
+  ];
+  var items=[];
+  for(var i=0;i<R.length;i++){
+    if(R[i].d===today||R[i].d===tm||R[i].d===d3){
+      var lbl=R[i].d===today?'TODAY':R[i].d===tm?'TOMORROW':'IN 2 DAYS';
+      items.push('<div class="rb-item"><span class="rb-date">'+lbl+'</span> '+R[i].t+'</div>');
+    }
+  }
+  if(items.length>0){
+    banner.innerHTML='<strong>\u23f0 Upcoming</strong>'+items.join('');
+    banner.style.display='block';
+  }
+}
+showReminders();
 </script>
 
 <script>
@@ -2333,7 +2424,7 @@ var TRIP_EVENTS = [
   { id: 'reminder-nakashima',  type: 'reminder', icon: '⏰', title: 'Book Nakashima Restaurant', body: 'Reservations now open for 20 July dinner · 3 Michelin stars · ¥20,790pp · Book direct.', date: '2026-05-20' },
   { id: 'reminder-obus-htokyo', type: 'reminder', icon: '⏰', title: 'Book Overnight Bus Hiroshima→Tokyo', body: 'Book NOW — July peak fills fast · willer-travel.com/en/ · ~¥6,500pp · Book premium/semi-premium seat.', date: '2026-04-15' },
   { id: 'reminder-teamlab',    type: 'reminder', icon: '⏰', title: 'Book teamLab Borderless', body: 'Tickets on sale 1 May · teamlab.art · <a href="https://maps.google.com/?q=Azabudai+Hills+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Azabudai Hills</a> · Morning slot recommended.', date: '2026-05-01' },
-  { id: 'reminder-kyoto-shin', type: 'reminder', icon: '⏰', title: 'Shinkansen Kyoto→Hiroshima', body: 'Booking requested via shinkansen-ticket.com · Awaiting confirmation via email · Requested 19 July 15:00–15:30.', date: '2026-04-15' },
+  { id: 'reminder-kyoto-shin', type: 'reminder', icon: '⏰', title: 'Shinkansen Kyoto→Hiroshima', body: 'CONFIRMED · NOZOMI 71 · Kyoto 15:02 → Hiroshima 16:42 · Car 7 Seats 3-A &amp; 3-B · Awaiting confirmation via email · Requested 19 July 15:00–15:30.', date: '2026-04-15' },
   { id: 'event-namaiki', type: 'event', icon: '🥩', title: 'Namaiki dinner tonight 20:15 — Akihabara', body: 'Sister restaurant of Yoroniku · 5 min walk from Hotel Niwa · Smart casual · Booked via Tabelog · Remind staff of nut allergy on arrival.', date: '2026-07-07', hour: 19, min: 30 },
   { id: 'checkin-ninetree',    type: 'checkin', icon: '🏨', title: 'Check-in: Nine Tree Seoul today', body: 'Nine Tree by Parnas Myeongdong 2 · Check-in from 15:00 · Huayun Trip transfer booked.', date: '2026-07-02' },
   { id: 'checkin-niwa',        type: 'checkin', icon: '🏨', title: 'Check-in: <a href="https://maps.google.com/?q=Hotel+Niwa+Tokyo" target="_blank" style="color:#6ab8c8;text-decoration:none;border-bottom:1px solid rgba(106,184,200,0.3);">Hotel Niwa Tokyo</a> today', body: 'Hotel Niwa Tokyo · Chiyoda City · Check-in from 15:00.', date: '2026-07-04' },
